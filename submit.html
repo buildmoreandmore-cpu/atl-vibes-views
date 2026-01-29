@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit a Listing - ATL Vibes & Views</title>
+  <meta name="description" content="Submit your business or event to ATL Vibes & Views. Get discovered by Atlanta locals and visitors.">
+  <link rel="canonical" href="https://atlvibesandviews.com/submit.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Submit a Listing - ATL Vibes & Views">
+  <meta property="og:description" content="Submit your business or event to ATL Vibes & Views. Get discovered by Atlanta locals and visitors.">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="/js/geodir-api.js"></script>
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --accent-red: #A82B2B;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-white);
+      z-index: 1000;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .logo-tagline {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      color: var(--text-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 100px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, var(--primary-black) 0%, #2a2a2a 100%);
+      color: white;
+      padding: 4rem 5%;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Tab Navigation */
+    .tab-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 5%;
+    }
+
+    .tab-nav {
+      display: flex;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 2rem;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      background: none;
+      border: none;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-dark);
+    }
+
+    .tab-btn.active {
+      color: var(--primary-red);
+      border-bottom-color: var(--primary-red);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Form Styles */
+    .form-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
+
+    .form-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-dark);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    label .required {
+      color: var(--primary-red);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-yellow);
+      box-shadow: 0 0 0 3px rgba(255, 217, 90, 0.2);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .help-text {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 1.25rem 2rem;
+      background: var(--primary-red);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-red);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(220, 53, 53, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: #22c55e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: white;
+    }
+
+    .success-message h2 {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .success-message p {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+
+    .success-message .btn-secondary {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .success-message .btn-secondary:hover {
+      background: #e6c24e;
+    }
+
+    /* Error Message */
+    .error-message {
+      display: none;
+      padding: 1rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      color: #dc2626;
+      margin-bottom: 1.5rem;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* Loading State */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .loading.show {
+      display: block;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--primary-red);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-black);
+      color: white;
+      padding: 3rem 5%;
+      text-align: center;
+    }
+
+    .footer a {
+      color: var(--primary-yellow);
+      text-decoration: none;
+    }
+
+    .footer p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .tab-btn {
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/" class="logo">
+      <span class="logo-main">ATL Vibes & Views</span>
+      <span class="logo-tagline">Culture Blog & Vlog Magazine</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/directory.html">Directory</a></li>
+      <li><a href="/events.html">Events</a></li>
+      <li><a href="/submit.html" style="color: var(--primary-red);">Submit Listing</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>Submit a Listing</h1>
+      <p>Share your business or event with the Atlanta community. All submissions are reviewed before publishing.</p>
+    </div>
+
+    <div class="tab-container">
+      <!-- Tab Navigation -->
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="business">Submit a Business</button>
+        <button class="tab-btn" data-tab="event">Submit an Event</button>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-message" id="errorMessage"></div>
+
+      <!-- Loading State -->
+      <div class="loading" id="loadingState">
+        <div class="spinner"></div>
+        <p>Submitting your listing...</p>
+      </div>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMessage">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        </div>
+        <h2>Submission Received!</h2>
+        <p>Thank you for your submission. Our team will review it and publish it once approved. You'll see it on ATL Vibes & Views soon!</p>
+        <a href="/" class="btn-secondary">Return Home</a>
+      </div>
+
+      <!-- Business Form -->
+      <div class="tab-content active" id="businessForm">
+        <form id="businessSubmissionForm">
+          <!-- Basic Info -->
+          <div class="form-section">
+            <h3>Business Information</h3>
+            <div class="form-group">
+              <label>Business Name <span class="required">*</span></label>
+              <input type="text" name="post_title" required placeholder="e.g., Soul Food Kitchen">
+            </div>
+            <div class="form-group">
+              <label>Category <span class="required">*</span></label>
+              <select name="default_category" required id="businessCategory">
+                <option value="">Select a category...</option>
+                <option value="restaurants">Restaurants</option>
+                <option value="bars-nightlife">Bars & Nightlife</option>
+                <option value="cafes-coffee">Cafes & Coffee</option>
+                <option value="shopping">Shopping & Retail</option>
+                <option value="beauty-wellness">Beauty & Wellness</option>
+                <option value="fitness">Fitness & Gyms</option>
+                <option value="services">Professional Services</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="arts-culture">Arts & Culture</option>
+                <option value="automotive">Automotive</option>
+                <option value="home-services">Home Services</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Description <span class="required">*</span></label>
+              <textarea name="post_content" required placeholder="Tell us about your business. What makes it special?"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Tags</label>
+              <input type="text" name="post_tags" placeholder="e.g., soul-food, brunch, family-friendly">
+              <p class="help-text">Separate tags with commas. Tags help people find your business.</p>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Price Range</label>
+                <select name="price_range">
+                  <option value="">Select price range...</option>
+                  <option value="$">$ - Budget-friendly</option>
+                  <option value="$$">$$ - Moderate</option>
+                  <option value="$$$">$$$ - Upscale</option>
+                  <option value="$$$$">$$$$ - Fine Dining</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" name="phone" placeholder="(404) 555-1234">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Website</label>
+              <input type="url" name="website" placeholder="https://www.yourbusiness.com">
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-section">
+            <h3>Location</h3>
+            <div class="form-group">
+              <label>Street Address <span class="required">*</span></label>
+              <input type="text" name="street" required placeholder="123 Peachtree Street NE">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>City <span class="required">*</span></label>
+                <input type="text" name="city" value="Atlanta" required>
+              </div>
+              <div class="form-group">
+                <label>State <span class="required">*</span></label>
+                <input type="text" name="region" value="Georgia" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>ZIP Code <span class="required">*</span></label>
+                <input type="text" name="zip" required placeholder="30308">
+              </div>
+              <div class="form-group">
+                <label>Neighborhood</label>
+                <select name="neighbourhood" id="businessNeighbourhood">
+                  <option value="">Select neighborhood...</option>
+                  <option value="buckhead">Buckhead</option>
+                  <option value="midtown">Midtown</option>
+                  <option value="downtown">Downtown</option>
+                  <option value="virginia-highland">Virginia Highland</option>
+                  <option value="inman-park">Inman Park</option>
+                  <option value="old-fourth-ward">Old Fourth Ward</option>
+                  <option value="east-atlanta">East Atlanta</option>
+                  <option value="west-end">West End</option>
+                  <option value="grant-park">Grant Park</option>
+                  <option value="decatur">Decatur</option>
+                  <option value="little-five-points">Little Five Points</option>
+                  <option value="atlantic-station">Atlantic Station</option>
+                  <option value="poncey-highland">Poncey-Highland</option>
+                  <option value="kirkwood">Kirkwood</option>
+                  <option value="edgewood">Edgewood</option>
+                  <option value="reynoldstown">Reynoldstown</option>
+                  <option value="cabbagetown">Cabbagetown</option>
+                  <option value="castleberry-hill">Castleberry Hill</option>
+                  <option value="west-midtown">West Midtown</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>County</label>
+              <select name="county">
+                <option value="">Select county...</option>
+                <option value="fulton">Fulton County</option>
+                <option value="dekalb">DeKalb County</option>
+                <option value="cobb">Cobb County</option>
+                <option value="gwinnett">Gwinnett County</option>
+                <option value="clayton">Clayton County</option>
+              </select>
+            </div>
+            <input type="hidden" name="country" value="United States">
+          </div>
+
+          <!-- Contact Info -->
+          <div class="form-section">
+            <h3>Your Contact Information</h3>
+            <p class="help-text" style="margin-bottom: 1rem;">This is for verification purposes and won't be published.</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name <span class="required">*</span></label>
+                <input type="text" name="submitter_name" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label>Your Email <span class="required">*</span></label>
+                <input type="email" name="submitter_email" required placeholder="john@example.com">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Business</button>
+        </form>
+      </div>
+
+      <!-- Event Form -->
+      <div class="tab-content" id="eventForm">
+        <form id="eventSubmissionForm">
+          <!-- Event Info -->
+          <div class="form-section">
+            <h3>Event Information</h3>
+            <div class="form-group">
+              <label>Event Name <span class="required">*</span></label>
+              <input type="text" name="post_title" required placeholder="e.g., Atlanta Jazz Festival">
+            </div>
+            <div class="form-group">
+              <label>Category <span class="required">*</span></label>
+              <select name="default_category" required id="eventCategory">
+                <option value="">Select a category...</option>
+                <option value="music">Music & Concerts</option>
+                <option value="food-drink">Food & Drink</option>
+                <option value="arts">Arts & Theater</option>
+                <option value="sports">Sports & Fitness</option>
+                <option value="community">Community & Social</option>
+                <option value="business">Business & Networking</option>
+                <option value="family">Family & Kids</option>
+                <option value="festivals">Festivals & Fairs</option>
+                <option value="nightlife">Nightlife & Parties</option>
+                <option value="education">Classes & Workshops</option>
+                <option value="charity">Charity & Fundraisers</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Description <span class="required">*</span></label>
+              <textarea name="post_content" required placeholder="Describe your event. What can attendees expect?"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Event Date <span class="required">*</span></label>
+                <input type="date" name="event_start" required>
+              </div>
+              <div class="form-group">
+                <label>End Date</label>
+                <input type="date" name="event_end">
+                <p class="help-text">For multi-day events</p>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Start Time <span class="required">*</span></label>
+                <input type="time" name="event_start_time" required>
+              </div>
+              <div class="form-group">
+                <label>End Time</label>
+                <input type="time" name="event_end_time">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Ticket URL</label>
+              <input type="url" name="ticket_url" placeholder="https://tickets.example.com">
+              <p class="help-text">Link where people can buy tickets or RSVP</p>
+            </div>
+          </div>
+
+          <!-- Venue Location -->
+          <div class="form-section">
+            <h3>Venue Location</h3>
+            <div class="form-group">
+              <label>Venue Name <span class="required">*</span></label>
+              <input type="text" name="venue" required placeholder="e.g., Piedmont Park">
+            </div>
+            <div class="form-group">
+              <label>Street Address <span class="required">*</span></label>
+              <input type="text" name="street" required placeholder="400 Park Drive NE">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>City <span class="required">*</span></label>
+                <input type="text" name="city" value="Atlanta" required>
+              </div>
+              <div class="form-group">
+                <label>ZIP Code <span class="required">*</span></label>
+                <input type="text" name="zip" required placeholder="30306">
+              </div>
+            </div>
+            <input type="hidden" name="region" value="Georgia">
+            <input type="hidden" name="country" value="United States">
+          </div>
+
+          <!-- Contact Info -->
+          <div class="form-section">
+            <h3>Your Contact Information</h3>
+            <p class="help-text" style="margin-bottom: 1rem;">This is for verification purposes and won't be published.</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name <span class="required">*</span></label>
+                <input type="text" name="submitter_name" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label>Your Email <span class="required">*</span></label>
+                <input type="email" name="submitter_email" required placeholder="john@example.com">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Event</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 <a href="/">ATL Vibes & Views</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Tab Navigation
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+
+        // Update active states
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        btn.classList.add('active');
+        document.getElementById(tab + 'Form').classList.add('active');
+
+        // Hide messages
+        hideMessages();
+      });
+    });
+
+    // Form helpers
+    function showLoading() {
+      document.getElementById('loadingState').classList.add('show');
+      document.getElementById('businessForm').style.display = 'none';
+      document.getElementById('eventForm').style.display = 'none';
+    }
+
+    function hideLoading() {
+      document.getElementById('loadingState').classList.remove('show');
+    }
+
+    function showSuccess() {
+      hideLoading();
+      document.getElementById('successMessage').classList.add('show');
+    }
+
+    function showError(message) {
+      hideLoading();
+      const errorEl = document.getElementById('errorMessage');
+      errorEl.textContent = message;
+      errorEl.classList.add('show');
+      document.getElementById('businessForm').style.display = 'block';
+      document.getElementById('eventForm').style.display = 'block';
+    }
+
+    function hideMessages() {
+      document.getElementById('errorMessage').classList.remove('show');
+      document.getElementById('successMessage').classList.remove('show');
+    }
+
+    function getFormData(form) {
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        if (value) data[key] = value;
+      });
+      return data;
+    }
+
+    // Business Form Submission
+    document.getElementById('businessSubmissionForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideMessages();
+      showLoading();
+
+      const data = getFormData(e.target);
+
+      // Add metadata
+      data.submitter_info = JSON.stringify({
+        name: data.submitter_name,
+        email: data.submitter_email
+      });
+
+      try {
+        const result = await GeoDirectoryAPI.submitBusiness(data);
+        showSuccess();
+      } catch (error) {
+        showError('Submission failed: ' + error.message);
+      }
+    });
+
+    // Event Form Submission
+    document.getElementById('eventSubmissionForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideMessages();
+      showLoading();
+
+      const data = getFormData(e.target);
+
+      // Add metadata
+      data.submitter_info = JSON.stringify({
+        name: data.submitter_name,
+        email: data.submitter_email
+      });
+
+      try {
+        const result = await GeoDirectoryAPI.submitEvent(data);
+        showSuccess();
+      } catch (error) {
+        showError('Submission failed: ' + error.message);
+      }
+    });
+
+    // Set minimum date for event date picker to today
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelector('input[name="event_start"]').setAttribute('min', today);
+    document.querySelector('input[name="event_end"]').setAttribute('min', today);
+
+    // Handle hash-based tab switching (e.g., submit.html#event)
+    function checkHash() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'event') {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        document.querySelector('[data-tab="event"]').classList.add('active');
+        document.getElementById('eventForm').classList.add('active');
+      }
+    }
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+  </script>
+</body>
+</html>

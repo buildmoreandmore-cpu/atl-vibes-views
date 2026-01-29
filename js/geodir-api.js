@@ -292,6 +292,58 @@ const GeoDirectoryAPI = {
     } catch (error) {
       return { available: false, error: error.message };
     }
+  },
+
+  /**
+   * Submit a new business listing
+   * @param {Object} businessData - The business data to submit
+   */
+  async submitBusiness(businessData) {
+    try {
+      const response = await fetch(`${PROXY_URL}?endpoint=places`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(businessData)
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.details?.message || error.message || `Submission failed: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Business submission error:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * Submit a new event listing
+   * @param {Object} eventData - The event data to submit
+   */
+  async submitEvent(eventData) {
+    try {
+      const response = await fetch(`${PROXY_URL}?endpoint=events`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData)
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.details?.message || error.message || `Submission failed: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Event submission error:', error);
+      throw error;
+    }
   }
 };
 

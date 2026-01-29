@@ -14,13 +14,13 @@ export default async function handler(req, res) {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(200).end();
   }
 
-  // Only allow GET requests
-  if (req.method !== 'GET') {
+  // Only allow GET and POST requests
+  if (req.method !== 'GET' && req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
@@ -72,12 +72,71 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Create Basic Auth header
+    const authHeader = 'Basic ' + Buffer.from(`${GD_KEY}:${GD_SECRET}`).toString('base64');
+
+    // Handle POST requests (create new listing)
+    if (req.method === 'POST') {
+      const { endpoint } = req.query;
+
+      if (!endpoint) {
+        return res.status(400).json({
+          error: 'Missing endpoint parameter',
+          usage: 'POST /api/geodir?endpoint=places'
+        });
+      }
+
+      // Only allow POST to places and events endpoints
+      const allowedPostEndpoints = ['places', 'events'];
+      if (!allowedPostEndpoints.includes(endpoint)) {
+        return res.status(403).json({
+          error: 'POST not allowed for this endpoint',
+          allowed: allowedPostEndpoints
+        });
+      }
+
+      const url = `${GD_URL}/wp-json/geodir/v2/${endpoint}`;
+
+      // Get the submission data from request body
+      const submissionData = req.body;
+
+      // Force status to pending for all public submissions
+      submissionData.status = 'pending';
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': authHeader,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(submissionData)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error('GeoDirectory API error:', data);
+        return res.status(response.status).json({
+          error: 'GeoDirectory API error',
+          details: data
+        });
+      }
+
+      // Set CORS headers
+      res.setHeader('Access-Control-Allow-Origin', '*');
+
+      return res.status(201).json({
+        success: true,
+        message: 'Submission received! It will appear after admin approval.',
+        data: data
+      });
+    }
+
+    // Handle GET requests (existing logic)
     // Build query string from remaining params
     const queryString = new URLSearchParams(params).toString();
     const url = `${GD_URL}/wp-json/geodir/v2/${endpoint}${queryString ? '?' + queryString : ''}`;
-
-    // Create Basic Auth header
-    const authHeader = 'Basic ' + Buffer.from(`${GD_KEY}:${GD_SECRET}`).toString('base64');
 
     // Make request to GeoDirectory API
     const response = await fetch(url, {
