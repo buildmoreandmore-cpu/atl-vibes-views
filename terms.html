@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Conditions - ATL Vibes & Views</title>
+  <meta name="description" content="Terms and Conditions for ATL Vibes & Views website. Read our terms of service, user agreements, and website usage policies.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --accent-red: #A82B2B;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-white);
+      z-index: 1000;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .logo-tagline {
+      font-size: 0.6rem;
+      color: var(--text-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 80px;
+      padding: 5rem 5%;
+      background: var(--primary-black);
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .hero .last-updated {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* Content */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary-black);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-number {
+      background: var(--primary-red);
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .section p {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .section ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section li {
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-black);
+      color: white;
+      padding: 4rem 5% 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary-yellow);
+      font-weight: 600;
+    }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--primary-red);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .footer-column h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+      color: var(--primary-yellow);
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-yellow);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+    }
+
+    .footer-bottom a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary-yellow);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-main">ATL Vibes & Views</span>
+      <span class="logo-tagline">Culture Blog & Vlog Magazine</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+      <li><a href="index.html#directory">Directory</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Terms & Conditions</h1>
+    <p class="last-updated">Last Updated: January 28, 2026</p>
+  </section>
+
+  <!-- Content -->
+  <main class="content">
+    <section class="section">
+      <h2><span class="section-number">1</span>Acceptance of Terms</h2>
+      <p>By accessing and using the ATL Vibes & Views website (atlvibesandviews.com), you accept and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our website.</p>
+      <p>These terms apply to all visitors, users, and others who access or use our services, including our website, social media channels, newsletters, and any other digital properties operated by ATL Vibes & Views.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">2</span>Use of Website</h2>
+      <p>You may use our website for lawful purposes only. You agree not to use the website:</p>
+      <ul>
+        <li>In any way that violates any applicable federal, state, local, or international law or regulation</li>
+        <li>To transmit any advertising or promotional material without our prior written consent</li>
+        <li>To impersonate or attempt to impersonate ATL Vibes & Views, an employee, another user, or any other person or entity</li>
+        <li>To engage in any conduct that restricts or inhibits anyone's use or enjoyment of the website</li>
+        <li>To attempt to gain unauthorized access to any portion of the website or any systems or networks connected to it</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">3</span>User Accounts</h2>
+      <p>When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of these Terms.</p>
+      <p>You are responsible for safeguarding the password you use to access our services and for any activities or actions under your password. You agree not to disclose your password to any third party and to notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">4</span>Intellectual Property</h2>
+      <p>The website and its entire contents, features, and functionality (including but not limited to all information, software, text, displays, images, video, and audio, and the design, selection, and arrangement thereof) are owned by ATL Vibes & Views, its licensors, or other providers of such material and are protected by United States and international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
+      <p>The ATL Vibes & Views name, logo, and all related names, logos, product and service names, designs, and slogans are trademarks of ATL Vibes & Views. You must not use such marks without our prior written permission.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">5</span>User Content & Submissions</h2>
+      <p>Any content you submit to the website, including business listings, event submissions, comments, photographs, and other materials ("User Content"), becomes the property of ATL Vibes & Views for use on our platforms.</p>
+      <p>By submitting User Content, you grant us a non-exclusive, royalty-free, perpetual, irrevocable, and fully sublicensable right to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, and display such content throughout the world in any media.</p>
+      <p>You represent and warrant that you own or control all rights to the User Content and that its use will not violate these Terms or cause injury to any person or entity.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">6</span>Prohibited Activities</h2>
+      <p>You agree not to engage in any of the following prohibited activities:</p>
+      <ul>
+        <li>Copying, distributing, or disclosing any part of the website in any medium</li>
+        <li>Using any automated system to access the website</li>
+        <li>Attempting to interfere with the proper working of the website</li>
+        <li>Bypassing any measures we may use to prevent or restrict access to the website</li>
+        <li>Using the website to transmit any viruses, worms, or other malicious code</li>
+        <li>Collecting or harvesting any personally identifiable information from the website</li>
+        <li>Using the website for any commercial solicitation purposes without our consent</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">7</span>Third-Party Links</h2>
+      <p>Our website may contain links to third-party websites or services that are not owned or controlled by ATL Vibes & Views. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.</p>
+      <p>You acknowledge and agree that ATL Vibes & Views shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of any such content, goods, or services available on or through any such websites or services.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">8</span>Disclaimers</h2>
+      <p>THE WEBSITE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. NEITHER ATL VIBES & VIEWS NOR ANY PERSON ASSOCIATED WITH ATL VIBES & VIEWS MAKES ANY WARRANTY OR REPRESENTATION WITH RESPECT TO THE COMPLETENESS, SECURITY, RELIABILITY, QUALITY, ACCURACY, OR AVAILABILITY OF THE WEBSITE.</p>
+      <p>We do not warrant that the website will be uninterrupted, timely, secure, or error-free, or that defects will be corrected. Information about businesses, events, and properties listed on our website is provided by third parties and may not be accurate or current.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">9</span>Limitation of Liability</h2>
+      <p>IN NO EVENT WILL ATL VIBES & VIEWS, ITS AFFILIATES, OR THEIR LICENSORS, SERVICE PROVIDERS, EMPLOYEES, AGENTS, OFFICERS, OR DIRECTORS BE LIABLE FOR DAMAGES OF ANY KIND, UNDER ANY LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH YOUR USE, OR INABILITY TO USE, THE WEBSITE, INCLUDING ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.</p>
+      <p>The foregoing does not affect any liability that cannot be excluded or limited under applicable law.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">10</span>Governing Law</h2>
+      <p>These Terms shall be governed by and construed in accordance with the laws of the State of Georgia, United States, without regard to its conflict of law provisions.</p>
+      <p>Any legal suit, action, or proceeding arising out of or related to these Terms or the website shall be instituted exclusively in the federal courts of the United States or the courts of the State of Georgia, in each case located in Fulton County. You waive any and all objections to the exercise of jurisdiction over you by such courts and to venue in such courts.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">11</span>Changes to Terms</h2>
+      <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+      <p>By continuing to access or use our website after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the website.</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="section-number">12</span>Contact Information</h2>
+      <p>If you have any questions about these Terms, please contact us:</p>
+      <p><strong>ATL Vibes & Views</strong><br>
+      3355 Lenox Rd, Ste 750<br>
+      Atlanta, GA 30326<br>
+      Email: <a href="mailto:hello@atlvibesandviews.com" style="color: var(--primary-red);">hello@atlvibesandviews.com</a></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>ATL Vibes & Views</h3>
+        <p>Your comprehensive guide to Atlanta's neighborhoods, culture, events, and real estate. Discover what makes each corner of our city special.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/atlvibesandviews/" class="social-link" target="_blank" rel="noopener noreferrer">IG</a>
+          <a href="#" class="social-link">FB</a>
+          <a href="#" class="social-link">TW</a>
+          <a href="#" class="social-link">YT</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+          <li><a href="index.html#directory">Business Directory</a></li>
+          <li><a href="index.html#events">Events</a></li>
+          <li><a href="index.html#properties">Properties</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Get Listed</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#submit">Submit Business</a></li>
+          <li><a href="index.html#submit">Add Event</a></li>
+          <li><a href="advertise.html">Advertise</a></li>
+          <li><a href="activation.html">Activation</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="media-kit.html">Media Kit</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="terms.html">Terms & Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ATL Vibes & Views. All rights reserved. |
+        <a href="terms.html">Terms</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="cookies.html">Cookies</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

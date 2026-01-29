@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Policy - ATL Vibes & Views</title>
+  <meta name="description" content="Cookie Policy for ATL Vibes & Views. Learn about the cookies we use and how to manage your cookie preferences.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --accent-red: #A82B2B;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-white);
+      z-index: 1000;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .logo-tagline {
+      font-size: 0.6rem;
+      color: var(--text-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 80px;
+      padding: 5rem 5%;
+      background: var(--primary-black);
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .hero .last-updated {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* Content */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .intro {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary-black);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-yellow);
+      display: inline-block;
+    }
+
+    .section p {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .section ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section li {
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .section a {
+      color: var(--primary-red);
+      text-decoration: none;
+    }
+
+    .section a:hover {
+      text-decoration: underline;
+    }
+
+    /* Cookie Table */
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .cookie-table th,
+    .cookie-table td {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .cookie-table th {
+      background: var(--primary-black);
+      color: white;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .cookie-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cookie-table tr:hover td {
+      background: var(--secondary-yellow);
+    }
+
+    .cookie-type {
+      font-weight: 600;
+      color: var(--primary-black);
+    }
+
+    .cookie-required {
+      display: inline-block;
+      background: var(--primary-red);
+      color: white;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 0.5rem;
+    }
+
+    .cookie-optional {
+      display: inline-block;
+      background: var(--text-light);
+      color: white;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 0.5rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-black);
+      color: white;
+      padding: 4rem 5% 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary-yellow);
+      font-weight: 600;
+    }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--primary-red);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .footer-column h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+      color: var(--primary-yellow);
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-yellow);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+    }
+
+    .footer-bottom a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary-yellow);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .cookie-table {
+        font-size: 0.9rem;
+      }
+
+      .cookie-table th,
+      .cookie-table td {
+        padding: 0.75rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
+      }
+
+      .cookie-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-main">ATL Vibes & Views</span>
+      <span class="logo-tagline">Culture Blog & Vlog Magazine</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+      <li><a href="index.html#directory">Directory</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Cookie Policy</h1>
+    <p class="last-updated">Last Updated: January 28, 2026</p>
+  </section>
+
+  <!-- Content -->
+  <main class="content">
+    <p class="intro">This Cookie Policy explains how ATL Vibes & Views ("we," "us," or "our") uses cookies and similar tracking technologies when you visit our website atlvibesandviews.com. This policy should be read alongside our <a href="privacy.html">Privacy Policy</a>.</p>
+
+    <section class="section">
+      <h2>What Are Cookies?</h2>
+      <p>Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently, provide a better user experience, and give website owners information about how visitors use their site.</p>
+      <p>Cookies can be "persistent" (remaining on your device until they expire or you delete them) or "session" cookies (deleted when you close your browser).</p>
+    </section>
+
+    <section class="section">
+      <h2>Types of Cookies We Use</h2>
+      <p>We use the following types of cookies on our website:</p>
+
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Cookie Type</th>
+            <th>Purpose</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="cookie-type">Essential Cookies</span>
+              <span class="cookie-required">Required</span>
+            </td>
+            <td>These cookies are necessary for the website to function properly. They enable basic features like page navigation, secure access to authenticated areas, and remembering your cookie preferences. The website cannot function properly without these cookies.</td>
+            <td>Session / 1 year</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="cookie-type">Analytics Cookies</span>
+              <span class="cookie-optional">Optional</span>
+            </td>
+            <td>We use Google Analytics to understand how visitors interact with our website. These cookies collect information about page views, time spent on pages, bounce rates, and traffic sources. This helps us improve our website and content. All data is anonymized.</td>
+            <td>Up to 2 years</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="cookie-type">Preference Cookies</span>
+              <span class="cookie-optional">Optional</span>
+            </td>
+            <td>These cookies remember your settings and preferences, such as language preferences, neighborhood selections, and display options. They make your browsing experience more personalized and convenient.</td>
+            <td>1 year</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="cookie-type">Marketing Cookies</span>
+              <span class="cookie-optional">Optional</span>
+            </td>
+            <td>These cookies may be set by our advertising partners to build a profile of your interests and show you relevant advertisements on other websites. They do not directly store personal information but are based on uniquely identifying your browser and device.</td>
+            <td>Up to 2 years</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Third-Party Cookies</h2>
+      <p>In addition to our own cookies, we may also use various third-party cookies to report usage statistics, deliver advertisements, and so on. These include:</p>
+      <ul>
+        <li><strong>Google Analytics:</strong> Used to analyze website traffic and user behavior</li>
+        <li><strong>Google Fonts:</strong> Used to deliver web fonts for consistent typography</li>
+        <li><strong>Social Media Platforms:</strong> Cookies from Instagram, Facebook, Twitter, and YouTube when you interact with embedded content or social sharing buttons</li>
+        <li><strong>Embedded Content:</strong> When we embed content from external sites (e.g., YouTube videos, Instagram posts), those sites may set their own cookies</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Managing Cookies</h2>
+      <p>You have several options for managing cookies:</p>
+
+      <p><strong>Browser Settings:</strong> Most web browsers allow you to control cookies through their settings. You can typically find these settings in the "Options" or "Preferences" menu of your browser. The following links provide information on how to manage cookies in popular browsers:</p>
+      <ul>
+        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
+        <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer">Microsoft Edge</a></li>
+      </ul>
+
+      <p><strong>Google Analytics Opt-Out:</strong> You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>.</p>
+
+      <p><strong>Do Not Track:</strong> Some browsers have a "Do Not Track" feature that signals to websites that you do not want to be tracked. We currently do not respond to "Do Not Track" signals.</p>
+
+      <p><strong>Please Note:</strong> If you choose to block or delete cookies, some features of our website may not work properly, and your user experience may be affected.</p>
+    </section>
+
+    <section class="section">
+      <h2>Updates to This Policy</h2>
+      <p>We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will post any changes on this page and update the "Last Updated" date.</p>
+    </section>
+
+    <section class="section">
+      <h2>Contact Us</h2>
+      <p>If you have any questions about our use of cookies or this Cookie Policy, please contact us:</p>
+      <p><strong>ATL Vibes & Views</strong><br>
+      3355 Lenox Rd, Ste 750<br>
+      Atlanta, GA 30326<br>
+      Email: <a href="mailto:hello@atlvibesandviews.com">hello@atlvibesandviews.com</a></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>ATL Vibes & Views</h3>
+        <p>Your comprehensive guide to Atlanta's neighborhoods, culture, events, and real estate. Discover what makes each corner of our city special.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/atlvibesandviews/" class="social-link" target="_blank" rel="noopener noreferrer">IG</a>
+          <a href="#" class="social-link">FB</a>
+          <a href="#" class="social-link">TW</a>
+          <a href="#" class="social-link">YT</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+          <li><a href="index.html#directory">Business Directory</a></li>
+          <li><a href="index.html#events">Events</a></li>
+          <li><a href="index.html#properties">Properties</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Get Listed</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#submit">Submit Business</a></li>
+          <li><a href="index.html#submit">Add Event</a></li>
+          <li><a href="advertise.html">Advertise</a></li>
+          <li><a href="activation.html">Activation</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="media-kit.html">Media Kit</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="terms.html">Terms & Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ATL Vibes & Views. All rights reserved. |
+        <a href="terms.html">Terms</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="cookies.html">Cookies</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found - ATL Vibes & Views</title>
+  <meta name="description" content="The page you're looking for couldn't be found. Return to ATL Vibes & Views homepage.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --accent-red: #A82B2B;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: var(--primary-white);
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .logo-tagline {
+      font-size: 0.6rem;
+      color: var(--text-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+    }
+
+    /* 404 Content */
+    .error-page {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .error-content {
+      max-width: 600px;
+    }
+
+    .error-code {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--primary-black);
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    .error-code::after {
+      content: '';
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 4px;
+      background: var(--primary-yellow);
+    }
+
+    .error-title {
+      font-size: 2.5rem;
+      margin: 1.5rem 0 1rem;
+      color: var(--primary-black);
+    }
+
+    .error-message {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .error-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .error-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .error-btn.primary {
+      background: var(--primary-red);
+      color: white;
+    }
+
+    .error-btn.primary:hover {
+      background: var(--accent-red);
+      transform: translateY(-2px);
+    }
+
+    .error-btn.secondary {
+      background: var(--primary-black);
+      color: white;
+    }
+
+    .error-btn.secondary:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+
+    .error-btn.tertiary {
+      background: white;
+      color: var(--primary-black);
+      border: 2px solid var(--border-color);
+    }
+
+    .error-btn.tertiary:hover {
+      border-color: var(--primary-black);
+      transform: translateY(-2px);
+    }
+
+    /* Suggestions */
+    .suggestions {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .suggestions h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .suggestion-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .suggestion-links a {
+      color: var(--primary-red);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .suggestion-links a:hover {
+      color: var(--accent-red);
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-black);
+      color: white;
+      padding: 2rem 5%;
+      text-align: center;
+    }
+
+    .footer p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+    }
+
+    .footer a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    .footer a:hover {
+      color: var(--primary-yellow);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .error-code {
+        font-size: 8rem;
+      }
+
+      .error-title {
+        font-size: 1.8rem;
+      }
+
+      .error-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .error-btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+      }
+
+      .suggestion-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-main">ATL Vibes & Views</span>
+      <span class="logo-tagline">Culture Blog & Vlog Magazine</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+      <li><a href="index.html#directory">Directory</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 404 Content -->
+  <main class="error-page">
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-message">Looks like this page got lost in one of Atlanta's 243 neighborhoods. Don't worry, we'll help you find your way back.</p>
+
+      <div class="error-buttons">
+        <a href="index.html" class="error-btn primary">Return Home</a>
+        <a href="index.html#neighborhoods" class="error-btn secondary">Explore Neighborhoods</a>
+        <a href="index.html#directory" class="error-btn tertiary">View Directory</a>
+      </div>
+
+      <div class="suggestions">
+        <h3>You might be looking for:</h3>
+        <div class="suggestion-links">
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact</a>
+          <a href="advertise.html">Advertise</a>
+          <a href="media-kit.html">Media Kit</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 ATL Vibes & Views. All rights reserved. |
+      <a href="terms.html">Terms</a> |
+      <a href="privacy.html">Privacy</a> |
+      <a href="cookies.html">Cookies</a>
+    </p>
+  </footer>
+</body>
+</html>

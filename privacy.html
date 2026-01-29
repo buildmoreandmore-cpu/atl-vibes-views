@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - ATL Vibes & Views</title>
+  <meta name="description" content="Privacy Policy for ATL Vibes & Views. Learn how we collect, use, and protect your personal information.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --accent-red: #A82B2B;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-white);
+      z-index: 1000;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .logo-tagline {
+      font-size: 0.6rem;
+      color: var(--text-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 80px;
+      padding: 5rem 5%;
+      background: var(--primary-black);
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .hero .effective-date {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* Content */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .intro {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary-black);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-yellow);
+      display: inline-block;
+    }
+
+    .section h3 {
+      font-size: 1.3rem;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--text-dark);
+    }
+
+    .section p {
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .section ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section li {
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .section a {
+      color: var(--primary-red);
+      text-decoration: none;
+    }
+
+    .section a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-black);
+      color: white;
+      padding: 4rem 5% 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary-yellow);
+      font-weight: 600;
+    }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--primary-red);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .footer-column h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+      color: var(--primary-yellow);
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-yellow);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+    }
+
+    .footer-bottom a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary-yellow);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-main">ATL Vibes & Views</span>
+      <span class="logo-tagline">Culture Blog & Vlog Magazine</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+      <li><a href="index.html#directory">Directory</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Privacy Policy</h1>
+    <p class="effective-date">Effective Date: January 28, 2026</p>
+  </section>
+
+  <!-- Content -->
+  <main class="content">
+    <p class="intro">ATL Vibes & Views ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website atlvibesandviews.com and use our services.</p>
+
+    <section class="section">
+      <h2>Information We Collect</h2>
+
+      <h3>Personal Information</h3>
+      <p>We may collect personal information that you voluntarily provide when you:</p>
+      <ul>
+        <li>Subscribe to our newsletter</li>
+        <li>Submit a business listing or event</li>
+        <li>Contact us through our website</li>
+        <li>Create an account</li>
+        <li>Participate in surveys or promotions</li>
+      </ul>
+      <p>This information may include your name, email address, phone number, business name, and mailing address.</p>
+
+      <h3>Usage Information</h3>
+      <p>We automatically collect certain information when you visit our website, including:</p>
+      <ul>
+        <li>IP address and browser type</li>
+        <li>Operating system</li>
+        <li>Pages viewed and time spent on pages</li>
+        <li>Referring website addresses</li>
+        <li>Actions taken on our website (clicks, searches)</li>
+      </ul>
+
+      <h3>Device Information</h3>
+      <p>We may collect information about the device you use to access our website, including device type, unique device identifiers, and mobile network information.</p>
+    </section>
+
+    <section class="section">
+      <h2>How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Provide, maintain, and improve our services</li>
+        <li>Process and manage business listings and event submissions</li>
+        <li>Send newsletters and marketing communications (with your consent)</li>
+        <li>Respond to your comments, questions, and requests</li>
+        <li>Analyze usage patterns to improve user experience</li>
+        <li>Detect, prevent, and address technical issues or fraud</li>
+        <li>Comply with legal obligations</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Cookies & Tracking Technologies</h2>
+      <p>We use cookies and similar tracking technologies to collect and track information and to improve our services. Cookies are small data files stored on your device.</p>
+      <p>For detailed information about the cookies we use and how to manage them, please see our <a href="cookies.html">Cookie Policy</a>.</p>
+    </section>
+
+    <section class="section">
+      <h2>Information Sharing</h2>
+      <p>We may share your information in the following circumstances:</p>
+      <ul>
+        <li><strong>Service Providers:</strong> With third-party vendors who perform services on our behalf (e.g., email delivery, analytics, hosting)</li>
+        <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
+        <li><strong>Legal Requirements:</strong> When required by law or to respond to legal process</li>
+        <li><strong>Protection:</strong> To protect the rights, property, or safety of ATL Vibes & Views, our users, or others</li>
+        <li><strong>With Consent:</strong> With your consent or at your direction</li>
+      </ul>
+      <p>We do not sell your personal information to third parties.</p>
+    </section>
+
+    <section class="section">
+      <h2>Data Security</h2>
+      <p>We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure.</p>
+      <p>We regularly review our security practices and update them as necessary to maintain appropriate protections.</p>
+    </section>
+
+    <section class="section">
+      <h2>Your Rights</h2>
+      <p>Depending on your location, you may have certain rights regarding your personal information:</p>
+
+      <h3>Access</h3>
+      <p>You may request access to the personal information we hold about you.</p>
+
+      <h3>Correction</h3>
+      <p>You may request that we correct inaccurate or incomplete personal information.</p>
+
+      <h3>Deletion</h3>
+      <p>You may request that we delete your personal information, subject to certain exceptions.</p>
+
+      <h3>Opt-Out</h3>
+      <p>You may opt out of receiving marketing communications from us at any time by clicking the "unsubscribe" link in our emails or contacting us directly.</p>
+
+      <p>To exercise any of these rights, please contact us at <a href="mailto:hello@atlvibesandviews.com">hello@atlvibesandviews.com</a>.</p>
+    </section>
+
+    <section class="section">
+      <h2>Third-Party Services</h2>
+      <p>Our website may contain links to third-party websites and services. We are not responsible for the privacy practices of these third parties. We encourage you to read their privacy policies.</p>
+
+      <h3>Analytics</h3>
+      <p>We use Google Analytics to help us understand how visitors use our website. Google Analytics uses cookies to collect information about your use of our website, which is transmitted to and stored by Google.</p>
+
+      <h3>Social Media</h3>
+      <p>Our website includes social media features and widgets. These features may collect your IP address and set cookies to enable the feature to function properly. Your interactions with these features are governed by the privacy policy of the company providing them.</p>
+    </section>
+
+    <section class="section">
+      <h2>Children's Privacy</h2>
+      <p>Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
+    </section>
+
+    <section class="section">
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Effective Date" at the top. We encourage you to review this Privacy Policy periodically.</p>
+    </section>
+
+    <section class="section">
+      <h2>Contact Us</h2>
+      <p>If you have questions or concerns about this Privacy Policy or our privacy practices, please contact us:</p>
+      <p><strong>ATL Vibes & Views</strong><br>
+      3355 Lenox Rd, Ste 750<br>
+      Atlanta, GA 30326<br>
+      Email: <a href="mailto:hello@atlvibesandviews.com">hello@atlvibesandviews.com</a></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>ATL Vibes & Views</h3>
+        <p>Your comprehensive guide to Atlanta's neighborhoods, culture, events, and real estate. Discover what makes each corner of our city special.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/atlvibesandviews/" class="social-link" target="_blank" rel="noopener noreferrer">IG</a>
+          <a href="#" class="social-link">FB</a>
+          <a href="#" class="social-link">TW</a>
+          <a href="#" class="social-link">YT</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+          <li><a href="index.html#directory">Business Directory</a></li>
+          <li><a href="index.html#events">Events</a></li>
+          <li><a href="index.html#properties">Properties</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Get Listed</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#submit">Submit Business</a></li>
+          <li><a href="index.html#submit">Add Event</a></li>
+          <li><a href="advertise.html">Advertise</a></li>
+          <li><a href="activation.html">Activation</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="media-kit.html">Media Kit</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="terms.html">Terms & Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ATL Vibes & Views. All rights reserved. |
+        <a href="terms.html">Terms</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="cookies.html">Cookies</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
