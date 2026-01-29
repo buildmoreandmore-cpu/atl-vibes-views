@@ -6305,11 +6305,17 @@
 
     // Area metadata for homepage map Area Card display
     const areaMetadata = {
-      downtown: {
-        name: 'Downtown Atlanta',
-        shortDescription: 'The heart of the city featuring world-class dining, sports venues, and historic landmarks.',
-        image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800',
-        vibes: ['Urban', 'Business', 'Entertainment']
+      buckhead: {
+        name: 'Buckhead',
+        shortDescription: 'Upscale shopping, fine dining, and Atlanta\'s most prestigious neighborhoods.',
+        image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800',
+        vibes: ['Upscale', 'Shopping', 'Fine Dining']
+      },
+      westside: {
+        name: 'Westside',
+        shortDescription: 'Industrial-chic restaurants, galleries, and West Midtown\'s thriving food scene.',
+        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800',
+        vibes: ['Restaurants', 'Galleries', 'Industrial-Chic']
       },
       midtown: {
         name: 'Midtown',
@@ -6317,47 +6323,53 @@
         image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800',
         vibes: ['Arts District', 'Walkable', 'Parks']
       },
-      eastside: {
-        name: 'Eastside Atlanta',
-        shortDescription: 'Historic neighborhoods, the BeltLine, and Atlanta\'s most creative food and bar scene.',
+      o4w: {
+        name: 'Old Fourth Ward',
+        shortDescription: 'Historic MLK district transformed by the BeltLine into a creative hub.',
         image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800',
-        vibes: ['BeltLine', 'Trendy', 'Creative']
+        vibes: ['BeltLine', 'Historic', 'Trendy']
       },
-      westside: {
-        name: 'Westside Atlanta',
-        shortDescription: 'Industrial-chic restaurants, galleries, and West Midtown\'s thriving food scene.',
-        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800',
-        vibes: ['Restaurants', 'Galleries', 'Industrial-Chic']
+      downtown: {
+        name: 'Downtown',
+        shortDescription: 'The heart of the city featuring world-class dining, sports venues, and historic landmarks.',
+        image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800',
+        vibes: ['Urban', 'Business', 'Entertainment']
+      },
+      eastside: {
+        name: 'Eastside',
+        shortDescription: 'Virginia-Highland charm and eclectic neighborhoods with local boutiques.',
+        image: 'https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?w=800',
+        vibes: ['Walkable', 'Boutiques', 'Brunch']
+      },
+      decatur: {
+        name: 'Decatur',
+        shortDescription: 'A city within a city with great schools, dining, and walkability.',
+        image: 'https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?w=800',
+        vibes: ['Family-Friendly', 'Dining', 'Progressive']
+      },
+      'inman-park': {
+        name: 'Inman Park',
+        shortDescription: 'Victorian elegance and creative energy in Atlanta\'s first suburb.',
+        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800',
+        vibes: ['Victorian', 'BeltLine', 'Creative']
       },
       southwest: {
         name: 'Southwest Atlanta',
         shortDescription: 'Historic HBCU campuses, community-driven revitalization, and emerging arts scenes.',
-        image: 'https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?w=800',
+        image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800',
         vibes: ['Historic', 'Community', 'Emerging']
-      },
-      southeast: {
-        name: 'Southeast Atlanta',
-        shortDescription: 'East Atlanta Village vibes, Grant Park charm, and Zoo Atlanta adventures.',
-        image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800',
-        vibes: ['Live Music', 'Parks', 'Family-Friendly']
-      },
-      buckhead: {
-        name: 'Buckhead',
-        shortDescription: 'Upscale shopping, fine dining, and Atlanta\'s most prestigious neighborhoods.',
-        image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800',
-        vibes: ['Upscale', 'Shopping', 'Fine Dining']
       },
       'south-atlanta': {
         name: 'South Atlanta',
         shortDescription: 'Historic communities with deep roots and exciting new developments.',
-        image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800',
+        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800',
         vibes: ['Historic', 'Community', 'Affordable']
       },
-      'north-atlanta': {
-        name: 'North Atlanta',
-        shortDescription: 'Suburban charm with excellent schools, parks, and family-friendly communities.',
-        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800',
-        vibes: ['Suburban', 'Family-Friendly', 'Schools']
+      'east-atlanta': {
+        name: 'East Atlanta',
+        shortDescription: 'East Atlanta Village vibes, Grant Park charm, and Zoo Atlanta adventures.',
+        image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800',
+        vibes: ['Live Music', 'Parks', 'Eclectic']
       }
     };
 
@@ -10534,72 +10546,47 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       );
     }
 
-    // Illustrated Atlanta Map Component with SVG Region Overlays - 9 Core Areas
-    // Updated for Homepage Map System V1 with selection state
+    // Illustrated Atlanta Map Component with SVG Region Overlays
+    // Labels are built into the map image - no tooltip needed
     function AtlantaMap({ neighborhoods, onSelect, selectedArea, onAreaSelect, onClear }) {
       const [hoveredRegion, setHoveredRegion] = useState(null);
-      const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
       const mapRef = React.useRef(null);
 
-      // 9 Consolidated Core Areas
+      // Core Areas matching the illustrated map
       const regions = [
-        { id: 'downtown', label: 'Downtown', path: 'M 40 50 L 58 48 L 62 62 L 52 68 L 38 65 Z' },
-        { id: 'midtown', label: 'Midtown', path: 'M 45 28 L 72 30 L 74 48 L 58 48 L 45 45 Z' },
-        { id: 'eastside', label: 'Eastside', path: 'M 72 30 L 100 32 L 100 68 L 75 70 L 62 62 L 58 48 L 74 48 L 72 30 Z' },
-        { id: 'westside', label: 'Westside', path: 'M 0 22 L 45 20 L 45 45 L 40 50 L 38 65 L 15 60 L 0 52 Z' },
-        { id: 'southwest', label: 'Southwest Atlanta', path: 'M 0 52 L 15 60 L 30 65 L 25 100 L 0 100 Z' },
-        { id: 'southeast', label: 'Southeast Atlanta', path: 'M 52 68 L 75 70 L 80 100 L 50 100 Z' },
-        { id: 'buckhead', label: 'Buckhead', path: 'M 35 0 L 90 0 L 90 25 L 72 30 L 45 28 L 35 18 Z' },
-        { id: 'south-atlanta', label: 'South Atlanta', path: 'M 30 65 L 52 68 L 50 100 L 25 100 Z' },
-        { id: 'north-atlanta', label: 'North Atlanta', path: 'M 90 0 L 100 0 L 100 32 L 90 25 Z' }
+        { id: 'buckhead', path: 'M 35 0 L 90 0 L 90 28 L 72 32 L 45 30 L 35 18 Z' },
+        { id: 'westside', path: 'M 0 18 L 35 18 L 45 30 L 45 48 L 38 55 L 32 70 L 0 70 Z' },
+        { id: 'midtown', path: 'M 45 30 L 60 30 L 62 48 L 45 48 Z' },
+        { id: 'o4w', path: 'M 60 30 L 72 32 L 72 50 L 62 48 Z' },
+        { id: 'downtown', path: 'M 45 48 L 62 48 L 62 60 L 50 65 L 38 60 L 38 55 Z' },
+        { id: 'eastside', path: 'M 72 32 L 100 32 L 100 55 L 85 55 L 72 50 Z' },
+        { id: 'decatur', path: 'M 85 55 L 100 55 L 100 75 L 85 75 Z' },
+        { id: 'inman-park', path: 'M 62 48 L 72 50 L 85 55 L 85 75 L 70 78 L 62 70 L 62 60 Z' },
+        { id: 'southwest', path: 'M 0 70 L 32 70 L 38 60 L 38 80 L 25 100 L 0 100 Z' },
+        { id: 'south-atlanta', path: 'M 38 60 L 50 65 L 50 80 L 38 80 Z' },
+        { id: 'east-atlanta', path: 'M 50 65 L 62 70 L 70 78 L 70 100 L 50 100 L 50 80 Z' }
       ];
 
       const handleRegionClick = (id) => {
-        // If onAreaSelect is provided (homepage map system), use selection behavior
         if (onAreaSelect) {
-          // Toggle selection: if already selected, deselect; otherwise select
           if (selectedArea === id) {
             onAreaSelect(null);
           } else {
             onAreaSelect(id);
           }
         } else {
-          // Fallback to original navigation behavior
           window.location.href = `${id}.html`;
         }
       };
 
-      const handleRegionHover = (id, e) => {
+      const handleRegionHover = (id) => {
         setHoveredRegion(id);
-        if (mapRef.current && e) {
-          const rect = mapRef.current.getBoundingClientRect();
-          setTooltipPos({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-          });
-        }
-      };
-
-      const handleMouseMove = (e) => {
-        if (hoveredRegion && mapRef.current) {
-          const rect = mapRef.current.getBoundingClientRect();
-          setTooltipPos({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-          });
-        }
       };
 
       const handleRegionLeave = () => {
         setHoveredRegion(null);
       };
 
-      const getRegionLabel = (id) => {
-        const region = regions.find(r => r.id === id);
-        return region ? region.label : '';
-      };
-
-      // Determine CSS class for region based on hover and selection state
       const getRegionClass = (regionId) => {
         let classes = 'map-region';
         if (hoveredRegion === regionId) classes += ' active';
@@ -10608,9 +10595,8 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       };
 
       return (
-        <div className="illustrated-map-wrapper" ref={mapRef} onMouseMove={handleMouseMove}>
+        <div className="illustrated-map-wrapper" ref={mapRef}>
           <div className="map-image-container">
-            {/* Full Color Map Image */}
             <img src="atlanta-map.png" alt="Atlanta Neighborhoods Map" className="illustrated-map-image" />
           </div>
 
@@ -10627,24 +10613,10 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
                 d={region.path}
                 className={getRegionClass(region.id)}
                 onClick={() => handleRegionClick(region.id)}
-                onMouseEnter={(e) => handleRegionHover(region.id, e)}
+                onMouseEnter={() => handleRegionHover(region.id)}
               />
             ))}
           </svg>
-
-          {/* Hover Tooltip */}
-          {hoveredRegion && (
-            <div
-              className="map-tooltip"
-              style={{
-                left: tooltipPos.x,
-                top: tooltipPos.y - 40,
-                transform: 'translateX(-50%)'
-              }}
-            >
-              {getRegionLabel(hoveredRegion)}
-            </div>
-          )}
 
           {/* Clear Selection Button */}
           {selectedArea && onClear && (
@@ -12274,15 +12246,17 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       // Map area IDs to listing area values (handle different naming conventions)
       const mapAreaToListingAreas = (areaId) => {
         const areaMapping = {
-          'downtown': ['downtown'],
-          'midtown': ['midtown'],
-          'eastside': ['eastside', 'oldFourthWard', 'virginiaHighland', 'inmanPark', 'inman park', 'old fourth ward', 'virginia-highland'],
-          'westside': ['westside', 'westMidtown', 'west midtown'],
-          'southwest': ['southwest', 'westEnd', 'west end'],
-          'southeast': ['southeast', 'eastAtlanta', 'grantPark', 'east atlanta', 'grant park', 'east atlanta village'],
           'buckhead': ['buckhead'],
-          'south-atlanta': ['southAtlanta', 'south atlanta'],
-          'north-atlanta': ['northAtlanta', 'north atlanta']
+          'westside': ['westside', 'westMidtown', 'west midtown'],
+          'midtown': ['midtown'],
+          'o4w': ['oldFourthWard', 'old fourth ward', 'o4w', 'poncey-highland'],
+          'downtown': ['downtown'],
+          'eastside': ['eastside', 'virginiaHighland', 'virginia-highland', 'morningside'],
+          'decatur': ['decatur', 'oakhurst'],
+          'inman-park': ['inmanPark', 'inman park', 'cabbagetown', 'reynoldstown', 'little five points'],
+          'southwest': ['southwest', 'westEnd', 'west end'],
+          'south-atlanta': ['southAtlanta', 'south atlanta', 'pittsburgh', 'mechanicsville'],
+          'east-atlanta': ['eastAtlanta', 'east atlanta', 'grantPark', 'grant park', 'east atlanta village', 'ormewood']
         };
         return areaMapping[areaId] || [areaId];
       };
