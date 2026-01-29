@@ -13241,7 +13241,15 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
                 <ul className="footer-links">
                   <li><a href="#" onClick={(e) => { e.preventDefault(); openSubmit('business'); }}>Submit Business</a></li>
                   <li><a href="#" onClick={(e) => { e.preventDefault(); openSubmit('event'); }}>Add Event</a></li>
-                  <li><a href="#submit">Advertise</a></li>
+                  <li><a href="advertise.html">Advertise</a></li>
+                </ul>
+              </div>
+              <div className="footer-column">
+                <h4>Resources</h4>
+                <ul className="footer-links">
+                  <li><a href="media-kit.html">Media Kit</a></li>
+                  <li><a href="activation.html">Activation</a></li>
+                  <li><a href="#" onClick={(e) => { e.preventDefault(); if(user && user.role === 'admin') { setShowCMS(true); } else { setShowAuth(true); } }}>Admin Portal</a></li>
                 </ul>
               </div>
               <div className="footer-column">
