@@ -121,30 +121,19 @@ export default async function handler(req, res) {
       // Debug: Log what we're sending
       console.log('Submitting to GeoDirectory:', JSON.stringify(submissionData, null, 2));
 
-      // Convert to form-urlencoded with %20 for spaces (WordPress compatibility)
-      const formParts = [];
-      for (const [key, value] of Object.entries(submissionData)) {
-        if (Array.isArray(value)) {
-          // Handle arrays (like post_category)
-          value.forEach((v, i) => {
-            formParts.push(`${encodeURIComponent(`${key}[${i}]`)}=${encodeURIComponent(v)}`);
-          });
-        } else if (value !== null && value !== undefined) {
-          formParts.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
-        }
-      }
-      const formBody = formParts.join('&');
+      // Send as JSON to WordPress REST API
+      const jsonBody = JSON.stringify(submissionData);
 
-      console.log('Form data being sent:', formBody);
+      console.log('JSON body being sent:', jsonBody);
 
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Authorization': authHeader,
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json; charset=utf-8',
           'Accept': 'application/json'
         },
-        body: formBody
+        body: jsonBody
       });
 
       const data = await response.json();
