@@ -6,10 +6,28 @@
   <title>Westside - ATL Vibes & Views | West Midtown, Industrial-Chic & Galleries</title>
   <meta name="description" content="Explore Atlanta's Westside - West Midtown's industrial-chic restaurants, galleries, and creative spaces. Home to Westside Provisions District.">
   <link rel="canonical" href="https://atlvibesandviews.com/westside.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlvibesandviews.com/westside.html">
+  <meta property="og:title" content="Westside Atlanta - West Midtown & Industrial-Chic | ATL Vibes & Views">
+  <meta property="og:description" content="Explore Atlanta's Westside - West Midtown's industrial-chic restaurants, galleries, and creative spaces.">
+  <meta property="og:image" content="https://atlvibesandviews.com/atlanta-map.png">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Westside Atlanta - West Midtown & Industrial-Chic | ATL Vibes & Views">
+  <meta name="twitter:description" content="Explore Atlanta's Westside - West Midtown's industrial-chic restaurants, galleries, and creative spaces.">
+  <meta name="twitter:image" content="https://atlvibesandviews.com/atlanta-map.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- GeoDirectory API Integration -->
+  <script src="/js/geodir-api.js"></script>
+  <script src="/js/area-page-api.js"></script>
   <style>
     :root { --primary-yellow: #FFD95A; --primary-red: #DC3535; --primary-black: #0A0A0A; --primary-white: #FAFAFA; --secondary-yellow: #FFF4D6; --text-dark: #1A1A1A; --text-light: #6B6B6B; --border-color: #E5E5E5; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -116,22 +134,40 @@
       { id: 'english-avenue', name: 'English Avenue', description: 'Historic area revitalizing', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800' },
       { id: 'vine-city', name: 'Vine City', description: 'Near Mercedes-Benz Stadium', image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800' }
     ];
-    const businesses = [
+    // Fallback Demo Businesses
+    const demoBusinesses = [
       { id: 1, name: 'Westside Provisions District', category: 'Mixed Use', description: 'Premier shopping and dining in converted warehouses.', image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800', neighborhood: 'Westside Provisions', featured: true },
       { id: 2, name: 'Miller Union', category: 'Restaurant', description: 'Award-winning farm-to-table Southern cuisine.', image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800', neighborhood: 'West Midtown', featured: true },
       { id: 3, name: 'Octane Coffee', category: 'Coffee', description: 'Artisanal coffee roasters and creative workspace.', image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800', neighborhood: 'West Midtown', featured: false }
     ];
-    const events = [
+    // Fallback Demo Events
+    const demoEvents = [
       { id: 1, title: 'Westside Art Walk', category: 'Art', description: 'Monthly gallery hop featuring local artists.', image: 'https://images.unsplash.com/photo-1578926375605-eaf7559b1458?w=800', date: 'First Friday Monthly', location: 'Marietta Street', featured: true }
     ];
-    const properties = [
+    // Fallback Demo Properties
+    const demoProperties = [
       { id: 1, price: '$520,000', address: '456 Howell Mill Rd', neighborhood: 'West Midtown', beds: 2, baths: 2, sqft: '1,650', image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800', featured: true }
     ];
     function AreaPage() {
       const [activeTab, setActiveTab] = useState('businesses');
       const [email, setEmail] = useState('');
       const [subscribed, setSubscribed] = useState(false);
+      const [businesses, setBusinesses] = useState(demoBusinesses);
+      const [events, setEvents] = useState(demoEvents);
+      const properties = demoProperties;
       const handleSubscribe = (e) => { e.preventDefault(); if (email) setSubscribed(true); };
+      // Load data from GeoDirectory API
+      useEffect(() => {
+        if (typeof window !== 'undefined' && window.AreaPageAPI) {
+          window.AreaPageAPI.loadAreaData(areaData.id, {
+            onBusinesses: setBusinesses,
+            onEvents: setEvents,
+            fallbackBusinesses: demoBusinesses,
+            fallbackEvents: demoEvents,
+            limit: 10
+          });
+        }
+      }, []);
       return (
         <>
           <nav className="navbar">

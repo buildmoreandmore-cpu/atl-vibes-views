@@ -6,10 +6,28 @@
   <title>Southwest Atlanta - ATL Vibes & Views | Historic & Emerging Neighborhoods</title>
   <meta name="description" content="Explore Southwest Atlanta's historic neighborhoods and emerging communities. Rich heritage, affordable housing, and strong community bonds.">
   <link rel="canonical" href="https://atlvibesandviews.com/southwest.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlvibesandviews.com/southwest.html">
+  <meta property="og:title" content="Southwest Atlanta - Historic & Emerging Neighborhoods | ATL Vibes & Views">
+  <meta property="og:description" content="Explore Southwest Atlanta's historic neighborhoods and emerging communities. Rich heritage and strong community bonds.">
+  <meta property="og:image" content="https://atlvibesandviews.com/atlanta-map.png">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Southwest Atlanta - Historic & Emerging Neighborhoods | ATL Vibes & Views">
+  <meta name="twitter:description" content="Explore Southwest Atlanta's historic neighborhoods and emerging communities.">
+  <meta name="twitter:image" content="https://atlvibesandviews.com/atlanta-map.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- GeoDirectory API Integration -->
+  <script src="/js/geodir-api.js"></script>
+  <script src="/js/area-page-api.js"></script>
   <style>
     :root { --primary-yellow: #FFD95A; --primary-red: #DC3535; --primary-black: #0A0A0A; --primary-white: #FAFAFA; --secondary-yellow: #FFF4D6; --text-dark: #1A1A1A; --text-light: #6B6B6B; --border-color: #E5E5E5; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -117,21 +135,39 @@
       { id: 'mozley-park', name: 'Mozley Park', description: 'Historic park and neighborhood', image: 'https://images.unsplash.com/photo-1551524559-8af4e6624178?w=800' },
       { id: 'ashview-heights', name: 'Ashview Heights', description: 'Near Atlanta University Center', image: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=800' }
     ];
-    const businesses = [
+    // Fallback Demo Businesses
+    const demoBusinesses = [
       { id: 1, name: 'The Mall West End', category: 'Shopping', description: 'Community shopping center with diverse retailers.', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800', neighborhood: 'West End', featured: true },
       { id: 2, name: 'Cascade Road Corridor', category: 'Mixed Use', description: 'Growing commercial corridor with restaurants and shops.', image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800', neighborhood: 'Cascade Heights', featured: false }
     ];
-    const events = [
+    // Fallback Demo Events
+    const demoEvents = [
       { id: 1, title: 'West End Festival', category: 'Community', description: 'Annual celebration of community and culture.', image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800', date: 'June 2026', location: 'West End', featured: true }
     ];
-    const properties = [
+    // Fallback Demo Properties
+    const demoProperties = [
       { id: 1, price: '$285,000', address: '123 Cascade Rd SW', neighborhood: 'Cascade Heights', beds: 3, baths: 2, sqft: '1,650', image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800', featured: true }
     ];
     function AreaPage() {
       const [activeTab, setActiveTab] = useState('businesses');
       const [email, setEmail] = useState('');
       const [subscribed, setSubscribed] = useState(false);
+      const [businesses, setBusinesses] = useState(demoBusinesses);
+      const [events, setEvents] = useState(demoEvents);
+      const properties = demoProperties;
       const handleSubscribe = (e) => { e.preventDefault(); if (email) setSubscribed(true); };
+      // Load data from GeoDirectory API
+      useEffect(() => {
+        if (typeof window !== 'undefined' && window.AreaPageAPI) {
+          window.AreaPageAPI.loadAreaData(areaData.id, {
+            onBusinesses: setBusinesses,
+            onEvents: setEvents,
+            fallbackBusinesses: demoBusinesses,
+            fallbackEvents: demoEvents,
+            limit: 10
+          });
+        }
+      }, []);
       return (
         <>
           <nav className="navbar">

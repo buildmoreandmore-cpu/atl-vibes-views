@@ -1,0 +1,15 @@
+# ATL Vibes & Views - Robots.txt
+# https://atlvibesandviews.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://atlvibesandviews.com/sitemap.xml
+
+# Block access to API endpoints (they're for internal use)
+Disallow: /api/
+
+# Block any admin or system files
+Disallow: /*.json$
+Disallow: /.vercel/

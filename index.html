@@ -4,11 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ATL Vibes & Views - Atlanta's Neighborhood & Culture Magazine</title>
+  <meta name="description" content="Discover Atlanta's vibrant neighborhoods, local businesses, events, and real estate. Your guide to Buckhead, Midtown, Downtown, and all of Atlanta's unique communities.">
+  <link rel="canonical" href="https://atlvibesandviews.com/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlvibesandviews.com/">
+  <meta property="og:title" content="ATL Vibes & Views - Atlanta's Neighborhood & Culture Magazine">
+  <meta property="og:description" content="Discover Atlanta's vibrant neighborhoods, local businesses, events, and real estate. Your guide to Buckhead, Midtown, Downtown, and all of Atlanta's unique communities.">
+  <meta property="og:image" content="https://atlvibesandviews.com/atlanta-map.png">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://atlvibesandviews.com/">
+  <meta name="twitter:title" content="ATL Vibes & Views - Atlanta's Neighborhood & Culture Magazine">
+  <meta name="twitter:description" content="Discover Atlanta's vibrant neighborhoods, local businesses, events, and real estate. Your guide to Buckhead, Midtown, Downtown, and all of Atlanta's unique communities.">
+  <meta name="twitter:image" content="https://atlvibesandviews.com/atlanta-map.png">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ATL Vibes & Views">
+  <meta name="geo.region" content="US-GA">
+  <meta name="geo.placename" content="Atlanta">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <!-- GeoDirectory API Service -->
+  <script src="/js/geodir-api.js"></script>
   <!-- IDX Broker Widget Script - Replace YOUR_IDX_ACCOUNT_ID with your actual account ID -->
   <script src="https://d32yb73xogvp0m.cloudfront.net/js/widgets/idx-widgets.js" data-idx-account="YOUR_IDX_ACCOUNT_ID"></script>
   <style>
@@ -6210,16 +6237,29 @@
     const { useState, useEffect } = React;
 
     // ============================================
-    // DEMO MODE - Replace with real Supabase later
+    // API CONFIGURATION
     // ============================================
-    // To connect to real Supabase:
-    // 1. Create project at supabase.com
-    // 2. Replace SUPABASE_URL and SUPABASE_KEY below
-    // 3. Set DEMO_MODE to false
+    // Data Source Options:
+    // 1. DEMO_MODE = true - Uses hardcoded demo data (default)
+    // 2. USE_GEODIRECTORY = true - Uses GeoDirectory REST API via /api/geodir proxy
+    // 3. USE_SUPABASE = true - Uses Supabase (future)
+    //
+    // GeoDirectory Setup:
+    // 1. Enable REST API in WordPress: GeoDirectory > Settings > API
+    // 2. Generate API keys and set them as Vercel environment variables:
+    //    - GEODIR_URL: Your WordPress site URL
+    //    - GEODIR_KEY: Consumer Key (ck_...)
+    //    - GEODIR_SECRET: Consumer Secret (cs_...)
+    // 3. Set USE_GEODIRECTORY = true below
 
     const DEMO_MODE = true;
+    const USE_GEODIRECTORY = false; // Set to true when GeoDirectory API is configured
+    const USE_SUPABASE = false;
     const SUPABASE_URL = 'https://your-project.supabase.co';
     const SUPABASE_KEY = 'your-anon-key';
+
+    // Check if GeoDirectory API is available (loaded from /js/geodir-api.js)
+    const geoDirectoryAvailable = typeof window !== 'undefined' && typeof window.GeoDirectoryAPI !== 'undefined';
 
     // Demo user data
     const demoUsers = {
@@ -7599,6 +7639,151 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       }
     ];
 
+    // ============================================
+    // GeoDirectory Data Integration Layer
+    // ============================================
+    // This bridges GeoDirectory API with the existing mockSupabase interface
+    // so all existing code continues to work without changes
+
+    const geodirData = {
+      // Cache for API responses
+      _cache: {},
+      _cacheTimeout: 5 * 60 * 1000, // 5 minutes
+
+      // Get businesses with caching
+      async getBusinesses(params = {}) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        const cacheKey = 'businesses_' + JSON.stringify(params);
+        if (this._cache[cacheKey] && Date.now() - this._cache[cacheKey].time < this._cacheTimeout) {
+          return this._cache[cacheKey].data;
+        }
+        try {
+          const result = await window.GeoDirectoryAPI.getBusinesses(params);
+          this._cache[cacheKey] = { data: result.items, time: Date.now() };
+          return result.items;
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Get businesses by area
+      async getBusinessesByArea(areaId, limit = 6) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        try {
+          const result = await window.GeoDirectoryAPI.getBusinessesByArea(areaId, { per_page: limit });
+          return result.items;
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Get single business by ID
+      async getBusinessById(id) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        try {
+          return await window.GeoDirectoryAPI.getBusinessById(id);
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Get events
+      async getEvents(params = {}) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        const cacheKey = 'events_' + JSON.stringify(params);
+        if (this._cache[cacheKey] && Date.now() - this._cache[cacheKey].time < this._cacheTimeout) {
+          return this._cache[cacheKey].data;
+        }
+        try {
+          const result = await window.GeoDirectoryAPI.getEvents(params);
+          this._cache[cacheKey] = { data: result.items, time: Date.now() };
+          return result.items;
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Get events by area
+      async getEventsByArea(areaId, limit = 6) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        try {
+          const result = await window.GeoDirectoryAPI.getEventsByArea(areaId, { per_page: limit });
+          return result.items;
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Get upcoming events
+      async getUpcomingEvents(limit = 10) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        try {
+          const result = await window.GeoDirectoryAPI.getUpcomingEvents({ per_page: limit });
+          return result.items;
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Get featured businesses
+      async getFeaturedBusinesses(limit = 6) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        try {
+          const result = await window.GeoDirectoryAPI.getFeaturedBusinesses({ per_page: limit });
+          return result.items;
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Search businesses
+      async searchBusinesses(query, params = {}) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        try {
+          const result = await window.GeoDirectoryAPI.searchBusinesses(query, params);
+          return result.items;
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Get reviews for a listing
+      async getReviews(listingId) {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        try {
+          const result = await window.GeoDirectoryAPI.getReviews(listingId);
+          return result.items;
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Get categories
+      async getBusinessCategories() {
+        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
+        try {
+          return await window.GeoDirectoryAPI.getBusinessCategories();
+        } catch (e) {
+          console.error('GeoDirectory API error:', e);
+          return null;
+        }
+      },
+
+      // Clear cache
+      clearCache() {
+        this._cache = {};
+      }
+    };
+
     // Mock Supabase-like functions for demo
     const mockSupabase = {
       auth: {
@@ -7622,10 +7807,25 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       },
       businessDetail: {
         getById: async (id) => {
+          // Try GeoDirectory API first (for numeric IDs)
+          if (USE_GEODIRECTORY && !isNaN(id)) {
+            const geodirBusiness = await geodirData.getBusinessById(id);
+            if (geodirBusiness) return geodirBusiness;
+          }
+
+          // Fallback to demo data
           await new Promise(r => setTimeout(r, 300));
           return demoListings.find(l => l.id === id && l.type === 'business') || null;
         },
         getNearbyListings: async (business, limit = 6) => {
+          // For GeoDirectory businesses, fetch nearby by neighborhood
+          if (USE_GEODIRECTORY && business?.neighborhood) {
+            const nearby = await geodirData.getBusinessesByArea(business.area, limit + 1);
+            if (nearby && nearby.length > 0) {
+              return nearby.filter(b => b.id !== business.id).slice(0, limit);
+            }
+          }
+
           await new Promise(r => setTimeout(r, 400));
           if (!business) return [];
           const sameNeighborhood = demoListings.filter(l => l.type === 'business' && l.status === 'approved' && l.id !== business.id && l.neighborhood?.toLowerCase() === business.neighborhood?.toLowerCase());
@@ -7643,6 +7843,11 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
             stories = [...stories, ...areaStories];
           }
           return stories.slice(0, limit);
+        },
+        // Get reviews for a business (GeoDirectory only)
+        getReviews: async (businessId, limit = 10) => {
+          const reviews = await geodirData.getReviews(businessId);
+          return reviews || [];
         }
       },
       listings: {
@@ -7746,6 +7951,13 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       },
       businesses: {
         getByArea: async (areaId, limit = 6) => {
+          // Try GeoDirectory API first
+          const geodirBusinesses = await geodirData.getBusinessesByArea(areaId, limit);
+          if (geodirBusinesses && geodirBusinesses.length > 0) {
+            return geodirBusinesses;
+          }
+
+          // Fallback to demo data
           await new Promise(r => setTimeout(r, 400));
           // Map area IDs to neighborhood names for filtering
           const areaToNeighborhoods = {
@@ -7770,10 +7982,46 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
           return areaListings
             .sort((a, b) => (b.package === 'premium' || b.package === 'pro' ? 1 : 0) - (a.package === 'premium' || a.package === 'pro' ? 1 : 0))
             .slice(0, limit);
+        },
+        // Search businesses (uses GeoDirectory when available)
+        search: async (query, params = {}) => {
+          const geodirResults = await geodirData.searchBusinesses(query, params);
+          if (geodirResults) return geodirResults;
+
+          // Fallback to demo data search
+          await new Promise(r => setTimeout(r, 400));
+          const queryLower = query.toLowerCase();
+          return demoListings.filter(l =>
+            l.type === 'business' &&
+            l.status === 'approved' &&
+            (l.name?.toLowerCase().includes(queryLower) ||
+             l.description?.toLowerCase().includes(queryLower) ||
+             l.category?.toLowerCase().includes(queryLower))
+          ).slice(0, params.per_page || 20);
+        },
+        // Get featured businesses
+        getFeatured: async (limit = 6) => {
+          const geodirFeatured = await geodirData.getFeaturedBusinesses(limit);
+          if (geodirFeatured && geodirFeatured.length > 0) return geodirFeatured;
+
+          // Fallback to demo data
+          await new Promise(r => setTimeout(r, 400));
+          return demoListings.filter(l =>
+            l.type === 'business' &&
+            l.status === 'approved' &&
+            (l.featured || l.package === 'premium' || l.package === 'pro')
+          ).slice(0, limit);
         }
       },
       events: {
         getByArea: async (areaId, limit = 6) => {
+          // Try GeoDirectory API first
+          const geodirEvents = await geodirData.getEventsByArea(areaId, limit);
+          if (geodirEvents && geodirEvents.length > 0) {
+            return geodirEvents;
+          }
+
+          // Fallback to demo data
           await new Promise(r => setTimeout(r, 400));
           const areaToNeighborhoods = {
             buckhead: ['Buckhead', 'Lenox Square', 'Phipps Plaza'],
@@ -7796,6 +8044,24 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
           return areaEvents
             .sort((a, b) => (b.package === 'premium' ? 1 : 0) - (a.package === 'premium' ? 1 : 0))
             .slice(0, limit);
+        },
+        // Get upcoming events
+        getUpcoming: async (limit = 10) => {
+          const geodirUpcoming = await geodirData.getUpcomingEvents(limit);
+          if (geodirUpcoming && geodirUpcoming.length > 0) return geodirUpcoming;
+
+          // Fallback to demo data
+          await new Promise(r => setTimeout(r, 400));
+          const now = new Date();
+          return demoListings.filter(l =>
+            l.type === 'event' &&
+            l.status === 'approved' &&
+            (l.startDate ? new Date(l.startDate) >= now : true)
+          ).sort((a, b) => {
+            const aDate = a.startDate ? new Date(a.startDate) : new Date('2099-12-31');
+            const bDate = b.startDate ? new Date(b.startDate) : new Date('2099-12-31');
+            return aDate - bDate;
+          }).slice(0, limit);
         }
       },
       // Neighborhood-specific data methods

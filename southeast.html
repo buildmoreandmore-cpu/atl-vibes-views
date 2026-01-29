@@ -6,10 +6,28 @@
   <title>Southeast Atlanta - ATL Vibes & Views | East Atlanta Village & More</title>
   <meta name="description" content="Explore Southeast Atlanta including East Atlanta Village, Ormewood Park, and Kirkwood. Eclectic vibes, live music, and diverse communities.">
   <link rel="canonical" href="https://atlvibesandviews.com/southeast.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlvibesandviews.com/southeast.html">
+  <meta property="og:title" content="Southeast Atlanta - East Atlanta Village & More | ATL Vibes & Views">
+  <meta property="og:description" content="Explore Southeast Atlanta including East Atlanta Village, Ormewood Park, and Kirkwood. Eclectic vibes and live music.">
+  <meta property="og:image" content="https://atlvibesandviews.com/atlanta-map.png">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Southeast Atlanta - East Atlanta Village & More | ATL Vibes & Views">
+  <meta name="twitter:description" content="Explore Southeast Atlanta including East Atlanta Village, Ormewood Park, and Kirkwood.">
+  <meta name="twitter:image" content="https://atlvibesandviews.com/atlanta-map.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- GeoDirectory API Integration -->
+  <script src="/js/geodir-api.js"></script>
+  <script src="/js/area-page-api.js"></script>
   <style>
     :root { --primary-yellow: #FFD95A; --primary-red: #DC3535; --primary-black: #0A0A0A; --primary-white: #FAFAFA; --secondary-yellow: #FFF4D6; --text-dark: #1A1A1A; --text-light: #6B6B6B; --border-color: #E5E5E5; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -115,22 +133,40 @@
       { id: 'edgewood', name: 'Edgewood', description: 'Nightlife corridor and entertainment', image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800' },
       { id: 'oakhurst', name: 'Oakhurst', description: 'Hip restaurants and local shops', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800' }
     ];
-    const businesses = [
+    // Fallback Demo Businesses
+    const demoBusinesses = [
       { id: 1, name: 'The Earl', category: 'Live Music', description: 'Legendary live music venue and dive bar.', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800', neighborhood: 'East Atlanta Village', featured: true },
       { id: 2, name: 'Argosy', category: 'Restaurant', description: 'Neighborhood bar and grill with great food.', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800', neighborhood: 'East Atlanta Village', featured: true },
       { id: 3, name: 'Holy Taco', category: 'Restaurant', description: 'Mexican street food with a twist.', image: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=800', neighborhood: 'East Atlanta Village', featured: false }
     ];
-    const events = [
+    // Fallback Demo Events
+    const demoEvents = [
       { id: 1, title: 'East Atlanta Strut', category: 'Festival', description: 'Annual neighborhood parade and festival.', image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800', date: 'September 2026', location: 'East Atlanta Village', featured: true }
     ];
-    const properties = [
+    // Fallback Demo Properties
+    const demoProperties = [
       { id: 1, price: '$375,000', address: '123 Flat Shoals Ave', neighborhood: 'East Atlanta', beds: 2, baths: 1, sqft: '1,200', image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800', featured: true }
     ];
     function AreaPage() {
       const [activeTab, setActiveTab] = useState('businesses');
       const [email, setEmail] = useState('');
       const [subscribed, setSubscribed] = useState(false);
+      const [businesses, setBusinesses] = useState(demoBusinesses);
+      const [events, setEvents] = useState(demoEvents);
+      const properties = demoProperties;
       const handleSubscribe = (e) => { e.preventDefault(); if (email) setSubscribed(true); };
+      // Load data from GeoDirectory API
+      useEffect(() => {
+        if (typeof window !== 'undefined' && window.AreaPageAPI) {
+          window.AreaPageAPI.loadAreaData(areaData.id, {
+            onBusinesses: setBusinesses,
+            onEvents: setEvents,
+            fallbackBusinesses: demoBusinesses,
+            fallbackEvents: demoEvents,
+            limit: 10
+          });
+        }
+      }, []);
       return (
         <>
           <nav className="navbar">

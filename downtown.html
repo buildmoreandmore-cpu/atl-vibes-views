@@ -6,10 +6,28 @@
   <title>Downtown - ATL Vibes & Views | Atlanta's Business & Entertainment Core</title>
   <meta name="description" content="Explore Downtown Atlanta, the city's business core with world-class attractions, sports venues, and historic landmarks.">
   <link rel="canonical" href="https://atlvibesandviews.com/downtown.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlvibesandviews.com/downtown.html">
+  <meta property="og:title" content="Downtown - Atlanta's Business & Entertainment Core | ATL Vibes & Views">
+  <meta property="og:description" content="Explore Downtown Atlanta, the city's business core with world-class attractions, sports venues, and historic landmarks.">
+  <meta property="og:image" content="https://atlvibesandviews.com/atlanta-map.png">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Downtown - Atlanta's Business & Entertainment Core | ATL Vibes & Views">
+  <meta name="twitter:description" content="Explore Downtown Atlanta, the city's business core with world-class attractions and historic landmarks.">
+  <meta name="twitter:image" content="https://atlvibesandviews.com/atlanta-map.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- GeoDirectory API Integration -->
+  <script src="/js/geodir-api.js"></script>
+  <script src="/js/area-page-api.js"></script>
   <style>
     :root { --primary-yellow: #FFD95A; --primary-red: #DC3535; --primary-black: #0A0A0A; --primary-white: #FAFAFA; --secondary-yellow: #FFF4D6; --accent-red: #A82B2B; --text-dark: #1A1A1A; --text-light: #6B6B6B; --border-color: #E5E5E5; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -115,22 +133,40 @@
       { id: 'castleberry-hill', name: 'Castleberry Hill', description: 'Lofts and art galleries', image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800' },
       { id: 'five-points', name: 'Five Points', description: 'MARTA hub and urban core', image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800' }
     ];
-    const businesses = [
+    // Fallback Demo Businesses
+    const demoBusinesses = [
       { id: 1, name: 'Georgia Aquarium', category: 'Attraction', description: 'One of the world\'s largest aquariums with amazing marine life.', image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800', neighborhood: 'Centennial Hill', featured: true },
       { id: 2, name: 'World of Coca-Cola', category: 'Attraction', description: 'Interactive experience celebrating the world\'s most famous beverage.', image: 'https://images.unsplash.com/photo-1561758033-48d52648ae8b?w=800', neighborhood: 'Centennial Hill', featured: true },
       { id: 3, name: 'Mercedes-Benz Stadium', category: 'Sports', description: 'Home of the Atlanta Falcons and Atlanta United.', image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800', neighborhood: 'South Downtown', featured: false }
     ];
-    const events = [
+    // Fallback Demo Events
+    const demoEvents = [
       { id: 1, title: 'Atlanta Falcons Game Day', category: 'Sports', description: 'NFL football at Mercedes-Benz Stadium.', image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800', date: 'Fall 2026', location: 'Mercedes-Benz Stadium', featured: true }
     ];
-    const properties = [
+    // Fallback Demo Properties
+    const demoProperties = [
       { id: 1, price: '$385,000', address: '100 Centennial Olympic Park Dr #1801', neighborhood: 'Centennial Hill', beds: 1, baths: 1, sqft: '950', image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800', featured: true }
     ];
     function AreaPage() {
       const [activeTab, setActiveTab] = useState('businesses');
       const [email, setEmail] = useState('');
       const [subscribed, setSubscribed] = useState(false);
+      const [businesses, setBusinesses] = useState(demoBusinesses);
+      const [events, setEvents] = useState(demoEvents);
+      const properties = demoProperties;
       const handleSubscribe = (e) => { e.preventDefault(); if (email) setSubscribed(true); };
+      // Load data from GeoDirectory API
+      useEffect(() => {
+        if (typeof window !== 'undefined' && window.AreaPageAPI) {
+          window.AreaPageAPI.loadAreaData(areaData.id, {
+            onBusinesses: setBusinesses,
+            onEvents: setEvents,
+            fallbackBusinesses: demoBusinesses,
+            fallbackEvents: demoEvents,
+            limit: 10
+          });
+        }
+      }, []);
       return (
         <>
           <nav className="navbar">

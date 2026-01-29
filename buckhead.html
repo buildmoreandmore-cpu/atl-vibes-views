@@ -6,10 +6,28 @@
   <title>Buckhead - ATL Vibes & Views | Atlanta's Upscale District</title>
   <meta name="description" content="Explore Buckhead, Atlanta's upscale district known for luxury shopping, fine dining, and vibrant nightlife. Discover neighborhoods, businesses, events, and real estate.">
   <link rel="canonical" href="https://atlvibesandviews.com/buckhead.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlvibesandviews.com/buckhead.html">
+  <meta property="og:title" content="Buckhead - Atlanta's Upscale District | ATL Vibes & Views">
+  <meta property="og:description" content="Explore Buckhead, Atlanta's upscale district known for luxury shopping, fine dining, and vibrant nightlife. Discover neighborhoods, businesses, events, and real estate.">
+  <meta property="og:image" content="https://atlvibesandviews.com/atlanta-map.png">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Buckhead - Atlanta's Upscale District | ATL Vibes & Views">
+  <meta name="twitter:description" content="Explore Buckhead, Atlanta's upscale district known for luxury shopping, fine dining, and vibrant nightlife.">
+  <meta name="twitter:image" content="https://atlvibesandviews.com/atlanta-map.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- GeoDirectory API Integration -->
+  <script src="/js/geodir-api.js"></script>
+  <script src="/js/area-page-api.js"></script>
   <style>
     :root {
       --primary-yellow: #FFD95A;
@@ -875,8 +893,8 @@
       { id: 'lenox', name: 'Lenox', description: 'High-rises and condos near Lenox Square Mall', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800' }
     ];
 
-    // Demo Businesses
-    const businesses = [
+    // Fallback Demo Businesses (used when GeoDirectory API is unavailable)
+    const demoBusinesses = [
       {
         id: 1,
         name: 'Bones Restaurant',
@@ -915,8 +933,8 @@
       }
     ];
 
-    // Demo Events
-    const events = [
+    // Fallback Demo Events (used when GeoDirectory API is unavailable)
+    const demoEvents = [
       {
         id: 1,
         title: 'Buckhead Art & Wine Festival',
@@ -939,8 +957,8 @@
       }
     ];
 
-    // Demo Properties
-    const properties = [
+    // Fallback Demo Properties (real estate - not from GeoDirectory)
+    const demoProperties = [
       {
         id: 1,
         price: '$1,250,000',
@@ -980,6 +998,30 @@
       const [activeTab, setActiveTab] = useState('businesses');
       const [email, setEmail] = useState('');
       const [subscribed, setSubscribed] = useState(false);
+      const [businesses, setBusinesses] = useState(demoBusinesses);
+      const [events, setEvents] = useState(demoEvents);
+      const [loading, setLoading] = useState(true);
+
+      // Fetch data from GeoDirectory API on mount
+      useEffect(() => {
+        if (typeof window !== 'undefined' && window.AreaPageAPI) {
+          window.AreaPageAPI.loadAreaData(areaData.id, {
+            onBusinesses: (data) => {
+              setBusinesses(data);
+              setLoading(false);
+            },
+            onEvents: (data) => {
+              setEvents(data);
+              setLoading(false);
+            },
+            fallbackBusinesses: demoBusinesses,
+            fallbackEvents: demoEvents,
+            limit: 10
+          });
+        } else {
+          setLoading(false);
+        }
+      }, []);
 
       const handleSubscribe = (e) => {
         e.preventDefault();
@@ -995,7 +1037,7 @@
           case 'events':
             return events;
           case 'properties':
-            return properties;
+            return demoProperties;
           default:
             return businesses;
         }

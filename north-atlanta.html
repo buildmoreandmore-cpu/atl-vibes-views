@@ -6,10 +6,28 @@
   <title>North Atlanta - ATL Vibes & Views | Sandy Springs, Dunwoody & Perimeter</title>
   <meta name="description" content="Explore North Atlanta and the Perimeter area including Sandy Springs, Dunwoody, and Chamblee. Business centers, diverse dining, and suburban amenities.">
   <link rel="canonical" href="https://atlvibesandviews.com/north-atlanta.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlvibesandviews.com/north-atlanta.html">
+  <meta property="og:title" content="North Atlanta - Sandy Springs, Dunwoody & Perimeter | ATL Vibes & Views">
+  <meta property="og:description" content="Explore North Atlanta and the Perimeter area including Sandy Springs, Dunwoody, and Chamblee.">
+  <meta property="og:image" content="https://atlvibesandviews.com/atlanta-map.png">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="North Atlanta - Sandy Springs, Dunwoody & Perimeter | ATL Vibes & Views">
+  <meta name="twitter:description" content="Explore North Atlanta and the Perimeter area including Sandy Springs, Dunwoody, and Chamblee.">
+  <meta name="twitter:image" content="https://atlvibesandviews.com/atlanta-map.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- GeoDirectory API Integration -->
+  <script src="/js/geodir-api.js"></script>
+  <script src="/js/area-page-api.js"></script>
   <style>
     :root { --primary-yellow: #FFD95A; --primary-red: #DC3535; --primary-black: #0A0A0A; --primary-white: #FAFAFA; --secondary-yellow: #FFF4D6; --text-dark: #1A1A1A; --text-light: #6B6B6B; --border-color: #E5E5E5; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -117,22 +135,40 @@
       { id: 'vinings', name: 'Vinings', description: 'Historic area near the river', image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800' },
       { id: 'smyrna', name: 'Smyrna', description: 'Growing city with great amenities', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800' }
     ];
-    const businesses = [
+    // Fallback Demo Businesses
+    const demoBusinesses = [
       { id: 1, name: 'Perimeter Mall', category: 'Shopping', description: 'Premier shopping destination in North Atlanta.', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800', neighborhood: 'Dunwoody', featured: true },
       { id: 2, name: 'Buford Highway Food Corridor', category: 'Dining', description: 'Diverse international restaurants along Buford Highway.', image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800', neighborhood: 'Chamblee', featured: true },
       { id: 3, name: 'Chattahoochee River National Recreation Area', category: 'Parks', description: 'Beautiful river trails and outdoor activities.', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800', neighborhood: 'Sandy Springs', featured: false }
     ];
-    const events = [
+    // Fallback Demo Events
+    const demoEvents = [
       { id: 1, title: 'Taste of Chamblee', category: 'Food Festival', description: 'Celebrating the diverse cuisines of Buford Highway.', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800', date: 'October 2026', location: 'Chamblee', featured: true }
     ];
-    const properties = [
+    // Fallback Demo Properties
+    const demoProperties = [
       { id: 1, price: '$485,000', address: '123 Roswell Rd', neighborhood: 'Sandy Springs', beds: 3, baths: 2, sqft: '2,100', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800', featured: true }
     ];
     function AreaPage() {
       const [activeTab, setActiveTab] = useState('businesses');
       const [email, setEmail] = useState('');
       const [subscribed, setSubscribed] = useState(false);
+      const [businesses, setBusinesses] = useState(demoBusinesses);
+      const [events, setEvents] = useState(demoEvents);
+      const properties = demoProperties;
       const handleSubscribe = (e) => { e.preventDefault(); if (email) setSubscribed(true); };
+      // Load data from GeoDirectory API
+      useEffect(() => {
+        if (typeof window !== 'undefined' && window.AreaPageAPI) {
+          window.AreaPageAPI.loadAreaData(areaData.id, {
+            onBusinesses: setBusinesses,
+            onEvents: setEvents,
+            fallbackBusinesses: demoBusinesses,
+            fallbackEvents: demoEvents,
+            limit: 10
+          });
+        }
+      }, []);
       return (
         <>
           <nav className="navbar">

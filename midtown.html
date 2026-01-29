@@ -6,10 +6,28 @@
   <title>Midtown - ATL Vibes & Views | Atlanta's Arts & Culture District</title>
   <meta name="description" content="Explore Midtown Atlanta, the heart of arts, culture, and urban lifestyle. Home to Piedmont Park, High Museum, and vibrant dining scene.">
   <link rel="canonical" href="https://atlvibesandviews.com/midtown.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlvibesandviews.com/midtown.html">
+  <meta property="og:title" content="Midtown - Atlanta's Arts & Culture District | ATL Vibes & Views">
+  <meta property="og:description" content="Explore Midtown Atlanta, the heart of arts, culture, and urban lifestyle. Home to Piedmont Park, High Museum, and vibrant dining scene.">
+  <meta property="og:image" content="https://atlvibesandviews.com/atlanta-map.png">
+  <meta property="og:site_name" content="ATL Vibes & Views">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Midtown - Atlanta's Arts & Culture District | ATL Vibes & Views">
+  <meta name="twitter:description" content="Explore Midtown Atlanta, the heart of arts, culture, and urban lifestyle. Home to Piedmont Park and High Museum.">
+  <meta name="twitter:image" content="https://atlvibesandviews.com/atlanta-map.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- GeoDirectory API Integration -->
+  <script src="/js/geodir-api.js"></script>
+  <script src="/js/area-page-api.js"></script>
   <style>
     :root {
       --primary-yellow: #FFD95A;
@@ -135,16 +153,19 @@
       { id: 'loring-heights', name: 'Loring Heights', description: 'Bungalows near I-75', image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800' },
       { id: 'home-park', name: 'Home Park', description: 'Near Georgia Tech campus', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800' }
     ];
-    const businesses = [
+    // Fallback Demo Businesses
+    const demoBusinesses = [
       { id: 1, name: 'High Museum of Art', category: 'Arts & Culture', description: 'Atlanta\'s leading art museum with world-class exhibitions.', image: 'https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=800', neighborhood: 'Midtown Core', featured: true },
       { id: 2, name: 'Piedmont Park', category: 'Parks', description: 'Atlanta\'s beloved 185-acre urban park.', image: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800', neighborhood: 'Midtown Core', featured: true },
       { id: 3, name: 'Fox Theatre', category: 'Entertainment', description: 'Historic venue hosting Broadway shows and concerts.', image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=800', neighborhood: 'Midtown Core', featured: false }
     ];
-    const events = [
+    // Fallback Demo Events
+    const demoEvents = [
       { id: 1, title: 'Atlanta Jazz Festival', category: 'Music', description: 'World-class jazz performances in Piedmont Park.', image: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800', date: 'May 25-27, 2026', location: 'Piedmont Park', featured: true },
       { id: 2, title: 'Music Midtown', category: 'Music Festival', description: 'Annual music festival featuring top artists.', image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800', date: 'September 2026', location: 'Piedmont Park', featured: true }
     ];
-    const properties = [
+    // Fallback Demo Properties
+    const demoProperties = [
       { id: 1, price: '$575,000', address: '123 Piedmont Ave NE', neighborhood: 'Midtown Core', beds: 3, baths: 2, sqft: '2,100', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800', featured: true },
       { id: 2, price: '$450,000', address: '456 Peachtree St NE #1205', neighborhood: 'Midtown Core', beds: 2, baths: 2, sqft: '1,450', image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800', featured: false }
     ];
@@ -152,7 +173,22 @@
       const [activeTab, setActiveTab] = useState('businesses');
       const [email, setEmail] = useState('');
       const [subscribed, setSubscribed] = useState(false);
+      const [businesses, setBusinesses] = useState(demoBusinesses);
+      const [events, setEvents] = useState(demoEvents);
+      const properties = demoProperties;
       const handleSubscribe = (e) => { e.preventDefault(); if (email) setSubscribed(true); };
+      // Load data from GeoDirectory API
+      useEffect(() => {
+        if (typeof window !== 'undefined' && window.AreaPageAPI) {
+          window.AreaPageAPI.loadAreaData(areaData.id, {
+            onBusinesses: setBusinesses,
+            onEvents: setEvents,
+            fallbackBusinesses: demoBusinesses,
+            fallbackEvents: demoEvents,
+            limit: 10
+          });
+        }
+      }, []);
       return (
         <>
           <nav className="navbar">
