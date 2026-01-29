@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Activation - ATL Vibes & Views</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-white);
+      z-index: 1000;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .logo-tagline {
+      font-size: 0.6rem;
+      color: var(--text-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 80px;
+      height: 70vh;
+      min-height: 500px;
+      background: linear-gradient(135deg, var(--primary-black) 0%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600') center/cover;
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 0.5rem 1.5rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.85;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      background: white;
+      transform: translateY(-2px);
+    }
+
+    /* Section */
+    .section {
+      padding: 6rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: var(--primary-black);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-top: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Stats */
+    .stats-section {
+      background: var(--primary-black);
+      color: white;
+      padding: 4rem 5%;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 3.5rem;
+      color: var(--primary-yellow);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Activation Tiers */
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tier-card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .tier-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    }
+
+    .tier-card.featured {
+      border-color: var(--primary-yellow);
+      border-width: 2px;
+    }
+
+    .tier-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+      padding: 0.35rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 20px;
+    }
+
+    .tier-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--secondary-yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+    }
+
+    .tier-name {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tier-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .tier-price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-light);
+    }
+
+    .tier-description {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .tier-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .tier-features li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .tier-features li:last-child {
+      border-bottom: none;
+    }
+
+    .tier-features .check {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .tier-cta {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-black);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .tier-cta:hover {
+      background: var(--primary-red);
+    }
+
+    .tier-card.featured .tier-cta {
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+    }
+
+    .tier-card.featured .tier-cta:hover {
+      background: #e6c350;
+    }
+
+    /* Activation Types */
+    .types-section {
+      background: #f8f8f8;
+    }
+
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .type-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .type-image {
+      width: 40%;
+      min-height: 250px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .type-content {
+      padding: 2rem;
+      flex: 1;
+    }
+
+    .type-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .type-content p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .type-link {
+      color: var(--primary-red);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .type-link:hover {
+      text-decoration: underline;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--primary-yellow);
+      padding: 5rem 5%;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--primary-black);
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      color: var(--primary-black);
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--primary-black);
+      color: white;
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover {
+      background: var(--primary-red);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-black);
+      color: white;
+      padding: 3rem 5%;
+      text-align: center;
+    }
+
+    .footer p {
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: var(--primary-yellow);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tiers-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+      }
+
+      .types-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .type-card {
+        flex-direction: column;
+      }
+
+      .type-image {
+        width: 100%;
+        min-height: 200px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .stat-item h3 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-main">ATL Vibes & Views</span>
+      <span class="logo-tagline">Culture Blog & Vlog Magazine</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+      <li><a href="index.html#directory">Directory</a></li>
+      <li><a href="media-kit.html">Media Kit</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Partner With Us</span>
+      <h1>Brand Activation</h1>
+      <p>Connect with Atlanta's most engaged audience. From featured placements to sponsored events, we help brands make meaningful connections in the city's most vibrant neighborhoods.</p>
+      <a href="#packages" class="hero-cta">View Packages</a>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3>50K+</h3>
+        <p>Monthly Readers</p>
+      </div>
+      <div class="stat-item">
+        <h3>243</h3>
+        <p>Neighborhoods</p>
+      </div>
+      <div class="stat-item">
+        <h3>15K</h3>
+        <p>Social Followers</p>
+      </div>
+      <div class="stat-item">
+        <h3>500+</h3>
+        <p>Listed Businesses</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activation Packages -->
+  <section class="section" id="packages">
+    <div class="section-header">
+      <h2 class="section-title">Activation Packages</h2>
+      <p class="section-subtitle">Choose the partnership level that fits your brand's goals and budget</p>
+    </div>
+
+    <div class="tiers-grid">
+      <!-- Starter -->
+      <div class="tier-card">
+        <div class="tier-icon">🚀</div>
+        <h3 class="tier-name">Starter</h3>
+        <div class="tier-price">$499<span>/month</span></div>
+        <p class="tier-description">Perfect for local businesses looking to increase visibility</p>
+        <ul class="tier-features">
+          <li><span class="check">✓</span> Featured business listing</li>
+          <li><span class="check">✓</span> 1 sponsored social post/month</li>
+          <li><span class="check">✓</span> Newsletter mention</li>
+          <li><span class="check">✓</span> Basic analytics dashboard</li>
+          <li><span class="check">✓</span> Neighborhood spotlight eligibility</li>
+        </ul>
+        <a href="mailto:partnerships@atlvibesandviews.com?subject=Starter Package Inquiry" class="tier-cta">Get Started</a>
+      </div>
+
+      <!-- Growth -->
+      <div class="tier-card featured">
+        <div class="tier-icon">⭐</div>
+        <h3 class="tier-name">Growth</h3>
+        <div class="tier-price">$999<span>/month</span></div>
+        <p class="tier-description">For brands ready to make a significant impact in Atlanta</p>
+        <ul class="tier-features">
+          <li><span class="check">✓</span> Everything in Starter</li>
+          <li><span class="check">✓</span> Homepage featured placement</li>
+          <li><span class="check">✓</span> 4 sponsored social posts/month</li>
+          <li><span class="check">✓</span> Dedicated brand article</li>
+          <li><span class="check">✓</span> Event promotion (2/month)</li>
+          <li><span class="check">✓</span> Advanced analytics & reporting</li>
+        </ul>
+        <a href="mailto:partnerships@atlvibesandviews.com?subject=Growth Package Inquiry" class="tier-cta">Get Started</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="tier-card">
+        <div class="tier-icon">👑</div>
+        <h3 class="tier-name">Enterprise</h3>
+        <div class="tier-price">Custom</div>
+        <p class="tier-description">Tailored solutions for major brands and organizations</p>
+        <ul class="tier-features">
+          <li><span class="check">✓</span> Everything in Growth</li>
+          <li><span class="check">✓</span> Exclusive neighborhood takeover</li>
+          <li><span class="check">✓</span> Co-branded events & activations</li>
+          <li><span class="check">✓</span> Video production & features</li>
+          <li><span class="check">✓</span> Dedicated account manager</li>
+          <li><span class="check">✓</span> Custom integration options</li>
+        </ul>
+        <a href="mailto:partnerships@atlvibesandviews.com?subject=Enterprise Partnership Inquiry" class="tier-cta">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activation Types -->
+  <section class="section types-section">
+    <div class="section-header">
+      <h2 class="section-title">Activation Opportunities</h2>
+      <p class="section-subtitle">Multiple ways to connect with Atlanta's community</p>
+    </div>
+
+    <div class="types-grid">
+      <div class="type-card">
+        <div class="type-image" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600')"></div>
+        <div class="type-content">
+          <h3>Event Sponsorship</h3>
+          <p>Sponsor neighborhood events, food festivals, art walks, and community gatherings. Get your brand in front of engaged local audiences.</p>
+          <a href="mailto:partnerships@atlvibesandviews.com?subject=Event Sponsorship" class="type-link">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="type-card">
+        <div class="type-image" style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600')"></div>
+        <div class="type-content">
+          <h3>Content Partnership</h3>
+          <p>Collaborate on editorial content that tells your brand's story authentically within the context of Atlanta's culture and neighborhoods.</p>
+          <a href="mailto:partnerships@atlvibesandviews.com?subject=Content Partnership" class="type-link">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="type-card">
+        <div class="type-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=600')"></div>
+        <div class="type-content">
+          <h3>Neighborhood Takeover</h3>
+          <p>Become the exclusive brand partner for a specific Atlanta neighborhood. Own the conversation in Buckhead, Midtown, or any of our 243 areas.</p>
+          <a href="mailto:partnerships@atlvibesandviews.com?subject=Neighborhood Takeover" class="type-link">Learn More →</a>
+        </div>
+      </div>
+
+      <div class="type-card">
+        <div class="type-image" style="background-image: url('https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=600')"></div>
+        <div class="type-content">
+          <h3>Social Amplification</h3>
+          <p>Leverage our engaged social following across Instagram, Facebook, and YouTube to amplify your message to Atlanta's tastemakers.</p>
+          <a href="mailto:partnerships@atlvibesandviews.com?subject=Social Amplification" class="type-link">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to Activate?</h2>
+    <p>Let's discuss how ATL Vibes & Views can help your brand connect with Atlanta's most engaged audiences.</p>
+    <a href="mailto:partnerships@atlvibesandviews.com?subject=Partnership Inquiry" class="cta-button">Start the Conversation</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 ATL Vibes & Views. All rights reserved. |
+      <a href="index.html">Home</a> |
+      <a href="media-kit.html">Media Kit</a> |
+      <a href="terms.html">Terms</a> |
+      <a href="privacy.html">Privacy</a> |
+      <a href="cookies.html">Cookies</a>
+    </p>
+  </footer>
+</body>
+</html>
