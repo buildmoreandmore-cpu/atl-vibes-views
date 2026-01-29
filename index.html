@@ -10586,7 +10586,7 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
             </section>
 
             {/* See All CTA */}
-            <a href="#directory" className="see-all-cta">
+            <a href="directory.html" className="see-all-cta">
               See All Eats & Drinks →
             </a>
           </div>
@@ -12780,9 +12780,9 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
               <li><a href="#neighborhoods" onClick={() => { setShowDashboard(false); setShowCMS(false); navigateTo('home'); }}>Neighborhoods</a></li>
               <li><a onClick={() => { setShowDashboard(false); setShowCMS(false); navigateTo('eats-drinks'); }} style={{cursor: 'pointer', whiteSpace: 'nowrap'}}>Eats & Drinks</a></li>
               <li><a href="development.html">Development</a></li>
-              <li><a href="#directory" onClick={() => { setShowDashboard(false); setShowCMS(false); navigateTo('home'); }}>Directory</a></li>
+              <li><a href="directory.html">Directory</a></li>
               <li><a onClick={() => { setShowDashboard(false); setShowCMS(false); navigateTo('events'); }} style={{cursor: 'pointer'}}>Events</a></li>
-              <li><a href="#properties" onClick={() => { setShowDashboard(false); setShowCMS(false); navigateTo('home'); }}>Properties</a></li>
+              <li><a href="properties.html">Properties</a></li>
               {user ? (
                 <>
                   <li><button onClick={() => openSubmit('business')} className="submit-btn">Submit Listing</button></li>
@@ -12929,7 +12929,24 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
                   <AreaCard
                     area={mapSelectedArea}
                     areaData={areaMetadata[mapSelectedArea]}
-                    onExplore={(area) => window.location.href = `${area}.html`}
+                    onExplore={(area) => {
+                      const areaPageMap = {
+                        'buckhead': 'buckhead.html',
+                        'midtown': 'midtown.html',
+                        'downtown': 'downtown.html',
+                        'westside': 'westside.html',
+                        'eastside': 'eastside.html',
+                        'southwest': 'southwest.html',
+                        'southeast': 'southeast.html',
+                        'south-atlanta': 'south-atlanta.html',
+                        'north-atlanta': 'north-atlanta.html',
+                        'o4w': 'eastside.html',
+                        'decatur': 'eastside.html',
+                        'inman-park': 'eastside.html',
+                        'east-atlanta': 'southeast.html'
+                      };
+                      window.location.href = areaPageMap[area] || `${area}.html`;
+                    }}
                     onClose={() => setMapSelectedArea(null)}
                     onPrev={() => {
                       const areaKeys = Object.keys(areaMetadata);
@@ -13117,12 +13134,13 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
 
             {/* View All Properties CTA */}
             <div style={{textAlign: 'center'}}>
-              <button
+              <a
+                href="properties.html"
                 className="view-all-properties-btn"
-                onClick={() => handlePropertySearch(propertyFilters)}
+                style={{display: 'inline-block', textDecoration: 'none'}}
               >
                 View All Atlanta Listings
-              </button>
+              </a>
             </div>
           </section>
 

@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlanta Directory - ATL Vibes & Views | Businesses, Events & Properties</title>
+  <meta name="description" content="Explore Atlanta's comprehensive directory of local businesses, upcoming events, and real estate listings across 243 neighborhoods.">
+  <link rel="canonical" href="https://atlvibesandviews.com/directory.html">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --accent-red: #A82B2B;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-white);
+      z-index: 1000;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .logo-tagline {
+      font-size: 0.6rem;
+      color: var(--text-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+    }
+
+    .nav-links a.active {
+      color: var(--primary-red);
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 80px;
+      height: 50vh;
+      min-height: 400px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1600') center/cover;
+      filter: brightness(0.35);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Search Bar */
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .search-bar {
+      display: flex;
+      background: white;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 1.2rem 2rem;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-bar button {
+      padding: 1.2rem 2rem;
+      background: var(--primary-red);
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .search-bar button:hover {
+      background: var(--accent-red);
+    }
+
+    /* Section */
+    .section {
+      padding: 5rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: var(--primary-red);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 1.5rem auto 0;
+    }
+
+    /* Category Tabs */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .category-tab {
+      padding: 0.8rem 2rem;
+      background: white;
+      border: 2px solid var(--border-color);
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: var(--text-dark);
+    }
+
+    .category-tab:hover, .category-tab.active {
+      background: var(--primary-red);
+      border-color: var(--primary-red);
+      color: white;
+    }
+
+    /* Directory Grid */
+    .directory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .directory-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .directory-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .directory-card-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .directory-card-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--primary-red);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .directory-card-content {
+      padding: 1.5rem;
+    }
+
+    .directory-card-category {
+      font-size: 0.75rem;
+      color: var(--primary-red);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .directory-card-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .directory-card-location {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .directory-card-description {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .directory-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .directory-tag {
+      background: var(--secondary-yellow);
+      color: var(--text-dark);
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .directory-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .directory-card-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #f59e0b;
+    }
+
+    .directory-card-link {
+      color: var(--primary-red);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .directory-card-link:hover {
+      color: var(--accent-red);
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      background: var(--primary-black);
+      padding: 3rem 5%;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stat-item {
+      color: white;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--primary-yellow);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--secondary-yellow) 0%, white 100%);
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-text {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .cta-btn-primary {
+      background: var(--primary-red);
+      color: white;
+    }
+
+    .cta-btn-primary:hover {
+      background: var(--accent-red);
+      transform: translateY(-2px);
+    }
+
+    .cta-btn-secondary {
+      background: white;
+      color: var(--text-dark);
+      border: 2px solid var(--border-color);
+    }
+
+    .cta-btn-secondary:hover {
+      border-color: var(--primary-red);
+      color: var(--primary-red);
+    }
+
+    /* Filter Sidebar */
+    .directory-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .filter-sidebar {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    .filter-title {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .filter-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-group-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+    }
+
+    .filter-option input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-red);
+    }
+
+    .filter-option label {
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-black);
+      color: white;
+      padding: 4rem 5% 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 0 auto 3rem;
+    }
+
+    .footer-brand .logo-main {
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .footer-description {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .footer-social a:hover {
+      background: var(--primary-red);
+    }
+
+    .footer-title {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-yellow);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .directory-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-sidebar {
+        position: static;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .directory-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-main">ATL Vibes & Views</span>
+      <span class="logo-tagline">Discover Atlanta's Soul</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+      <li><a href="directory.html" class="active">Directory</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="properties.html">Properties</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Atlanta Directory</h1>
+      <p>Discover the best businesses, events, and properties across Atlanta's 243 unique neighborhoods</p>
+      <div class="search-container">
+        <div class="search-bar">
+          <input type="text" placeholder="Search businesses, events, or neighborhoods...">
+          <button>Search</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">2,450+</div>
+        <div class="stat-label">Local Businesses</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">180+</div>
+        <div class="stat-label">Upcoming Events</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">850+</div>
+        <div class="stat-label">Property Listings</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">243</div>
+        <div class="stat-label">Neighborhoods</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Tabs -->
+  <section class="section">
+    <div class="category-tabs">
+      <a href="#businesses" class="category-tab active">Businesses</a>
+      <a href="#events" class="category-tab">Events</a>
+      <a href="properties.html" class="category-tab">Properties</a>
+      <a href="#restaurants" class="category-tab">Restaurants</a>
+      <a href="#nightlife" class="category-tab">Nightlife</a>
+      <a href="#arts" class="category-tab">Arts & Culture</a>
+    </div>
+
+    <!-- Directory Grid -->
+    <div class="directory-grid" id="businesses">
+      <!-- Business 1 -->
+      <div class="directory-card">
+        <div class="directory-card-image" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600')">
+          <span class="directory-card-badge">Featured</span>
+        </div>
+        <div class="directory-card-content">
+          <div class="directory-card-category">Fine Dining</div>
+          <h3 class="directory-card-title">Bones Restaurant</h3>
+          <div class="directory-card-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Buckhead
+          </div>
+          <p class="directory-card-description">Atlanta's legendary steakhouse serving prime cuts and classic American cuisine since 1979.</p>
+          <div class="directory-card-tags">
+            <span class="directory-tag">Steakhouse</span>
+            <span class="directory-tag">Upscale</span>
+            <span class="directory-tag">Date Night</span>
+          </div>
+          <div class="directory-card-footer">
+            <div class="directory-card-rating">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+              <span style="color: var(--text-light); margin-left: 0.5rem;">4.8</span>
+            </div>
+            <a href="#" class="directory-card-link">View Details &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business 2 -->
+      <div class="directory-card">
+        <div class="directory-card-image" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600')">
+        </div>
+        <div class="directory-card-content">
+          <div class="directory-card-category">Cocktail Bar</div>
+          <h3 class="directory-card-title">Ticonderoga Club</h3>
+          <div class="directory-card-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Krog Street Market
+          </div>
+          <p class="directory-card-description">Award-winning cocktail bar with creative drinks and a speakeasy atmosphere.</p>
+          <div class="directory-card-tags">
+            <span class="directory-tag">Cocktails</span>
+            <span class="directory-tag">Speakeasy</span>
+          </div>
+          <div class="directory-card-footer">
+            <div class="directory-card-rating">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span>
+              <span style="color: var(--text-light); margin-left: 0.5rem;">4.6</span>
+            </div>
+            <a href="#" class="directory-card-link">View Details &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business 3 -->
+      <div class="directory-card">
+        <div class="directory-card-image" style="background-image: url('https://images.unsplash.com/photo-1594741158704-5a784b8e59fb?w=600')">
+          <span class="directory-card-badge">New</span>
+        </div>
+        <div class="directory-card-content">
+          <div class="directory-card-category">Museum</div>
+          <h3 class="directory-card-title">High Museum of Art</h3>
+          <div class="directory-card-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Midtown
+          </div>
+          <p class="directory-card-description">The Southeast's premier art museum featuring world-class exhibitions and permanent collections.</p>
+          <div class="directory-card-tags">
+            <span class="directory-tag">Art</span>
+            <span class="directory-tag">Culture</span>
+            <span class="directory-tag">Family</span>
+          </div>
+          <div class="directory-card-footer">
+            <div class="directory-card-rating">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+              <span style="color: var(--text-light); margin-left: 0.5rem;">4.9</span>
+            </div>
+            <a href="#" class="directory-card-link">View Details &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business 4 -->
+      <div class="directory-card">
+        <div class="directory-card-image" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600')">
+        </div>
+        <div class="directory-card-content">
+          <div class="directory-card-category">Restaurant</div>
+          <h3 class="directory-card-title">Staplehouse</h3>
+          <div class="directory-card-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Old Fourth Ward
+          </div>
+          <p class="directory-card-description">James Beard Award-winning restaurant serving innovative American cuisine with Southern roots.</p>
+          <div class="directory-card-tags">
+            <span class="directory-tag">Fine Dining</span>
+            <span class="directory-tag">Award-Winning</span>
+          </div>
+          <div class="directory-card-footer">
+            <div class="directory-card-rating">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+              <span style="color: var(--text-light); margin-left: 0.5rem;">4.9</span>
+            </div>
+            <a href="#" class="directory-card-link">View Details &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business 5 -->
+      <div class="directory-card">
+        <div class="directory-card-image" style="background-image: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600')">
+        </div>
+        <div class="directory-card-content">
+          <div class="directory-card-category">Entertainment</div>
+          <h3 class="directory-card-title">Georgia Aquarium</h3>
+          <div class="directory-card-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Downtown
+          </div>
+          <p class="directory-card-description">One of the world's largest aquariums featuring whale sharks, dolphins, and immersive marine exhibits.</p>
+          <div class="directory-card-tags">
+            <span class="directory-tag">Family</span>
+            <span class="directory-tag">Attraction</span>
+          </div>
+          <div class="directory-card-footer">
+            <div class="directory-card-rating">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+              <span style="color: var(--text-light); margin-left: 0.5rem;">4.7</span>
+            </div>
+            <a href="#" class="directory-card-link">View Details &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business 6 -->
+      <div class="directory-card">
+        <div class="directory-card-image" style="background-image: url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600')">
+          <span class="directory-card-badge">Popular</span>
+        </div>
+        <div class="directory-card-content">
+          <div class="directory-card-category">Brunch</div>
+          <h3 class="directory-card-title">Sun in My Belly</h3>
+          <div class="directory-card-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Kirkwood
+          </div>
+          <p class="directory-card-description">Beloved neighborhood cafe known for creative brunch dishes and a warm, welcoming atmosphere.</p>
+          <div class="directory-card-tags">
+            <span class="directory-tag">Brunch</span>
+            <span class="directory-tag">Cafe</span>
+            <span class="directory-tag">Local Favorite</span>
+          </div>
+          <div class="directory-card-footer">
+            <div class="directory-card-rating">
+              <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+              <span style="color: var(--text-light); margin-left: 0.5rem;">4.8</span>
+            </div>
+            <a href="#" class="directory-card-link">View Details &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section cta-section">
+    <div class="cta-content">
+      <h2 class="cta-title">List Your Business</h2>
+      <p class="cta-text">Join thousands of Atlanta businesses and get discovered by locals and visitors exploring the city.</p>
+      <div class="cta-buttons">
+        <a href="index.html#submit" class="cta-btn cta-btn-primary">Submit Listing</a>
+        <a href="advertise.html" class="cta-btn cta-btn-secondary">Learn About Advertising</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-main">ATL Vibes & Views</span>
+        <p class="footer-description">Your comprehensive guide to Atlanta's culture, neighborhoods, and lifestyle. Discover what makes the ATL special.</p>
+        <div class="footer-social">
+          <a href="#">IG</a>
+          <a href="#">FB</a>
+          <a href="#">TW</a>
+          <a href="#">YT</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-title">Explore</h4>
+        <ul class="footer-links">
+          <li><a href="buckhead.html">Buckhead</a></li>
+          <li><a href="midtown.html">Midtown</a></li>
+          <li><a href="downtown.html">Downtown</a></li>
+          <li><a href="eastside.html">Eastside</a></li>
+          <li><a href="westside.html">Westside</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Directory</h4>
+        <ul class="footer-links">
+          <li><a href="directory.html">All Businesses</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="properties.html">Properties</a></li>
+          <li><a href="advertise.html">Advertise</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Company</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 ATL Vibes & Views. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
