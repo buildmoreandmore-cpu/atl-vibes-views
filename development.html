@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATL Development | ATL Vibes & Views</title>
+  <meta name="description" content="Editorial development stories and neighborhood impact in Atlanta. Stay informed about the BeltLine, mixed-use developments, and urban transformation.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --accent-red: #A82B2B;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-white);
+      z-index: 1000;
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-black);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .logo-tagline {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--text-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-yellow);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-red);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--primary-red);
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .submit-btn {
+      background: var(--primary-red);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-red);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-top: 80px;
+      height: 70vh;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary-black) 0%, #2A2A2A 100%);
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+      z-index: 2;
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+    }
+
+    .hero-text {
+      text-align: center;
+      color: white;
+      max-width: 900px;
+      padding: 2rem;
+      z-index: 3;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-category {
+      display: inline-block;
+      background: var(--primary-red);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+
+    .hero-excerpt {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header.left-align {
+      text-align: left;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0.05em;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--primary-red);
+    }
+
+    .section-header:not(.left-align) .section-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-weight: 400;
+      font-family: 'Source Sans 3', sans-serif;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 1.5rem;
+    }
+
+    /* Featured Development Grid (6 stories) */
+    .development-section {
+      padding: 5rem 5%;
+      background: white;
+    }
+
+    .development-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .dev-story-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      background: white;
+    }
+
+    .dev-story-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .dev-story-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .dev-story-card:hover .dev-story-image {
+      transform: scale(1.05);
+    }
+
+    .dev-story-content {
+      padding: 1.5rem;
+    }
+
+    .dev-story-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: white;
+      background: var(--primary-red);
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .dev-story-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+      font-weight: 600;
+      color: var(--primary-black);
+    }
+
+    .dev-story-meta {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .dev-story-neighborhood {
+      color: var(--primary-red);
+      font-weight: 600;
+    }
+
+    /* Two-Column Content Layout */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 3rem;
+      padding: 4rem 5%;
+      background: var(--primary-white);
+    }
+
+    .main-content {
+      min-width: 0;
+    }
+
+    /* Neighborhood Spotlight */
+    .neighborhood-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .neighborhood-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .neighborhood-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .neighborhood-card-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .neighborhood-card:hover .neighborhood-card-image {
+      transform: scale(1.05);
+    }
+
+    .neighborhood-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+      color: white;
+    }
+
+    .neighborhood-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .neighborhood-card-count {
+      font-size: 0.75rem;
+      color: var(--primary-yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .explore-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.3s;
+    }
+
+    .explore-link:hover {
+      color: var(--primary-yellow);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-module {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .sidebar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--primary-yellow);
+    }
+
+    /* Newsletter Form */
+    .newsletter-description {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .newsletter-input {
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-family: 'Source Sans 3', sans-serif;
+      transition: border-color 0.3s;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--primary-red);
+    }
+
+    .newsletter-btn {
+      background: var(--primary-red);
+      color: white;
+      border: none;
+      padding: 0.875rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .newsletter-btn:hover {
+      background: var(--accent-red);
+      transform: translateY(-2px);
+    }
+
+    /* Ad Placeholder */
+    .ad-placeholder {
+      background: #f0f0f0;
+      border: 2px dashed var(--border-color);
+      border-radius: 4px;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Popular Neighborhoods List */
+    .neighborhood-list {
+      list-style: none;
+    }
+
+    .neighborhood-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.3s;
+    }
+
+    .neighborhood-list-item:last-child {
+      border-bottom: none;
+    }
+
+    .neighborhood-list-item:hover {
+      background: var(--secondary-yellow);
+      margin: 0 -1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .neighborhood-list-item a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .neighborhood-list-item a:hover {
+      color: var(--primary-red);
+    }
+
+    .neighborhood-list-count {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      background: var(--secondary-yellow);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* See All CTA Banner */
+    .see-all-cta {
+      background: var(--primary-red);
+      padding: 4rem 5%;
+      text-align: center;
+    }
+
+    .see-all-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .see-all-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .see-all-text {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .see-all-btn {
+      display: inline-block;
+      background: white;
+      color: var(--primary-red);
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      transition: all 0.3s;
+      border-radius: 4px;
+    }
+
+    .see-all-btn:hover {
+      background: var(--primary-black);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary-black);
+      color: white;
+      padding: 4rem 5% 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-yellow);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--primary-red);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .footer-column h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-yellow);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-yellow);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 1200px) {
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 968px) {
+      .development-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .sidebar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .development-grid,
+      .neighborhood-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .see-all-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // Primary hero story
+    const primaryDevelopmentStory = {
+      id: 1,
+      category: 'Development',
+      subcategory: 'Mixed-Use',
+      title: "The BeltLine's Next Chapter: Westside Trail Expansion Transforms West End",
+      excerpt: 'New mixed-use developments along the Westside Trail are reshaping Atlanta\'s historic West End neighborhood, bringing thousands of residential units, retail spaces, and community amenities while sparking conversations about equitable development.',
+      author: 'Marcus Johnson',
+      date: 'January 28, 2026',
+      image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600',
+      neighborhood: 'West End',
+      featured: true
+    };
+
+    // 6 additional featured stories
+    const featuredDevelopmentStories = [
+      {
+        id: 2,
+        subcategory: 'Residential',
+        title: 'Midtown High-Rise Breaks Ground on Peachtree',
+        neighborhood: 'Midtown',
+        date: '27 Jan 2026',
+        image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800'
+      },
+      {
+        id: 3,
+        subcategory: 'Commercial',
+        title: 'Tech Hub Anchors New Westside Development',
+        neighborhood: 'English Avenue',
+        date: '25 Jan 2026',
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800'
+      },
+      {
+        id: 4,
+        subcategory: 'Mixed-Use',
+        title: 'Ponce City Market Phase 2 Revealed',
+        neighborhood: 'Old Fourth Ward',
+        date: '24 Jan 2026',
+        image: 'https://images.unsplash.com/photo-1460317442991-0ec209397118?w=800'
+      },
+      {
+        id: 5,
+        subcategory: 'Transit-Oriented',
+        title: 'MARTA Station Development Plans Unveiled',
+        neighborhood: 'East Point',
+        date: '22 Jan 2026',
+        image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800'
+      },
+      {
+        id: 6,
+        subcategory: 'Adaptive Reuse',
+        title: 'Historic Warehouse Becomes Creative Campus',
+        neighborhood: 'Castleberry Hill',
+        date: '20 Jan 2026',
+        image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800'
+      },
+      {
+        id: 7,
+        subcategory: 'Residential',
+        title: 'Affordable Housing Project Breaks Record',
+        neighborhood: 'Pittsburgh',
+        date: '18 Jan 2026',
+        image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800'
+      }
+    ];
+
+    // Neighborhoods with development activity
+    const impactedNeighborhoods = [
+      {
+        name: 'Old Fourth Ward',
+        slug: 'old-fourth-ward',
+        storyCount: 12,
+        image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600'
+      },
+      {
+        name: 'West End',
+        slug: 'west-end',
+        storyCount: 9,
+        image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600'
+      },
+      {
+        name: 'Midtown',
+        slug: 'midtown',
+        storyCount: 15,
+        image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600'
+      },
+      {
+        name: 'English Avenue',
+        slug: 'english-avenue',
+        storyCount: 7,
+        image: 'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=600'
+      },
+      {
+        name: 'Reynoldstown',
+        slug: 'reynoldstown',
+        storyCount: 6,
+        image: 'https://images.unsplash.com/photo-1464938050520-ef2571d1b858?w=600'
+      },
+      {
+        name: 'Summerhill',
+        slug: 'summerhill',
+        storyCount: 8,
+        image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600'
+      }
+    ];
+
+    // Popular neighborhoods for sidebar
+    const popularNeighborhoods = [
+      { name: 'Midtown', storyCount: 15 },
+      { name: 'Old Fourth Ward', storyCount: 12 },
+      { name: 'West End', storyCount: 9 },
+      { name: 'Summerhill', storyCount: 8 },
+      { name: 'English Avenue', storyCount: 7 }
+    ];
+
+    // Development Hero Component
+    function DevelopmentHero({ story }) {
+      return (
+        <section className="hero">
+          <img src={story.image} alt={story.title} className="hero-image" />
+          <div className="hero-content">
+            <div className="hero-text">
+              <span className="hero-category">{story.category}</span>
+              <h1 className="hero-title">{story.title}</h1>
+              <p className="hero-excerpt">{story.excerpt}</p>
+              <p className="hero-meta">By {story.author} | {story.neighborhood} | {story.date}</p>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Development Grid Component (6 stories)
+    function DevelopmentGrid({ stories }) {
+      return (
+        <section className="development-section">
+          <div className="section-header">
+            <h2 className="section-title">Featured Development Stories</h2>
+            <p className="section-subtitle">Tracking Atlanta's Urban Transformation</p>
+          </div>
+          <div className="development-grid">
+            {stories.map((story) => (
+              <div key={story.id} className="dev-story-card">
+                <img src={story.image} alt={story.title} className="dev-story-image" />
+                <div className="dev-story-content">
+                  <span className="dev-story-tag">{story.subcategory}</span>
+                  <h3 className="dev-story-title">{story.title}</h3>
+                  <div className="dev-story-meta">
+                    <span className="dev-story-neighborhood">{story.neighborhood}</span>
+                    <span>{story.date}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    // Neighborhood Spotlight Component
+    function NeighborhoodSpotlight({ neighborhoods }) {
+      return (
+        <section className="neighborhood-spotlight">
+          <div className="section-header left-align">
+            <h2 className="section-title">Neighborhoods Impacted by Development</h2>
+            <p className="section-subtitle">Explore stories by location</p>
+          </div>
+          <div className="neighborhood-grid">
+            {neighborhoods.map((neighborhood) => (
+              <div key={neighborhood.slug} className="neighborhood-card">
+                <img src={neighborhood.image} alt={neighborhood.name} className="neighborhood-card-image" />
+                <div className="neighborhood-card-overlay">
+                  <h3 className="neighborhood-card-name">{neighborhood.name}</h3>
+                  <span className="neighborhood-card-count">{neighborhood.storyCount} stories</span>
+                  <a href={`#${neighborhood.slug}`} className="explore-link">Explore &rarr;</a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    // Sidebar Component
+    function Sidebar({ neighborhoods }) {
+      const [email, setEmail] = React.useState('');
+
+      const handleSubscribe = (e) => {
+        e.preventDefault();
+        alert(`Thank you for subscribing with: ${email}`);
+        setEmail('');
+      };
+
+      return (
+        <aside className="sidebar">
+          {/* Newsletter Module */}
+          <div className="sidebar-module">
+            <h4 className="sidebar-title">Stay Informed</h4>
+            <p className="newsletter-description">
+              Get the latest development news and neighborhood impact stories delivered to your inbox weekly.
+            </p>
+            <form className="newsletter-form" onSubmit={handleSubscribe}>
+              <input
+                type="email"
+                className="newsletter-input"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <button type="submit" className="newsletter-btn">Subscribe</button>
+            </form>
+          </div>
+
+          {/* Ad Placement */}
+          <div className="sidebar-module">
+            <div className="ad-placeholder">
+              Advertisement<br/>300 x 250
+            </div>
+          </div>
+
+          {/* Popular Neighborhoods */}
+          <div className="sidebar-module">
+            <h4 className="sidebar-title">Popular Neighborhoods</h4>
+            <ul className="neighborhood-list">
+              {neighborhoods.map((n, index) => (
+                <li key={index} className="neighborhood-list-item">
+                  <a href={`#${n.name.toLowerCase().replace(/\s+/g, '-')}`}>{n.name}</a>
+                  <span className="neighborhood-list-count">{n.storyCount} stories</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+      );
+    }
+
+    // See All CTA Component
+    function SeeAllCTA() {
+      return (
+        <section className="see-all-cta">
+          <div className="see-all-content">
+            <h2 className="see-all-title">Explore All Development Stories</h2>
+            <p className="see-all-text">
+              Dive deeper into Atlanta's transformation with our complete archive of development coverage, project tracking, and neighborhood impact analysis.
+            </p>
+            <a href="/development/archive" className="see-all-btn">View Full Archive</a>
+          </div>
+        </section>
+      );
+    }
+
+    // Footer Component
+    function Footer() {
+      return (
+        <footer className="footer">
+          <div className="footer-content">
+            <div className="footer-brand">
+              <h3>ATL Vibes & Views</h3>
+              <p>Your comprehensive guide to Atlanta's neighborhoods, culture, events, and real estate. Discover what makes each corner of our city special.</p>
+              <div className="social-links">
+                <a href="https://www.instagram.com/atlvibesandviews/" className="social-link" target="_blank" rel="noopener noreferrer">IG</a>
+                <a href="#" className="social-link">FB</a>
+                <a href="#" className="social-link">TW</a>
+                <a href="#" className="social-link">YT</a>
+              </div>
+            </div>
+            <div className="footer-column">
+              <h4>Explore</h4>
+              <ul className="footer-links">
+                <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+                <li><a href="index.html#directory">Business Directory</a></li>
+                <li><a href="index.html#events">Events</a></li>
+                <li><a href="index.html#properties">Properties</a></li>
+              </ul>
+            </div>
+            <div className="footer-column">
+              <h4>Coverage</h4>
+              <ul className="footer-links">
+                <li><a href="development.html">Development</a></li>
+                <li><a href="index.html">Culture</a></li>
+                <li><a href="index.html">Food & Drink</a></li>
+                <li><a href="index.html">Real Estate</a></li>
+              </ul>
+            </div>
+            <div className="footer-column">
+              <h4>Company</h4>
+              <ul className="footer-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="media-kit.html">Media Kit</a></li>
+              </ul>
+            </div>
+            <div className="footer-column">
+              <h4>Legal</h4>
+              <ul className="footer-links">
+                <li><a href="terms.html">Terms & Conditions</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="cookies.html">Cookie Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>&copy; 2026 ATL Vibes & Views. All rights reserved. |
+              <a href="terms.html">Terms</a> |
+              <a href="privacy.html">Privacy</a> |
+              <a href="cookies.html">Cookies</a>
+            </p>
+          </div>
+        </footer>
+      );
+    }
+
+    // Main App Component
+    function App() {
+      return (
+        <>
+          {/* Navigation */}
+          <nav className="navbar">
+            <a href="index.html" className="logo">
+              <span className="logo-main">ATL Vibes & Views</span>
+              <span className="logo-tagline">Culture Blog & Vlog Magazine</span>
+            </a>
+            <ul className="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+              <li><a href="development.html" className="active">Development</a></li>
+              <li><a href="index.html#directory">Directory</a></li>
+              <li><a href="index.html#events">Events</a></li>
+              <li><a href="index.html#properties">Properties</a></li>
+              <li><a href="index.html" className="submit-btn">Submit Listing</a></li>
+            </ul>
+          </nav>
+
+          {/* Primary Featured Development Story (Hero) */}
+          <DevelopmentHero story={primaryDevelopmentStory} />
+
+          {/* Featured Development Stories Grid (6 stories) */}
+          <DevelopmentGrid stories={featuredDevelopmentStories} />
+
+          {/* Two-Column Layout (Main + Sidebar) */}
+          <div className="content-layout">
+            <main className="main-content">
+              <NeighborhoodSpotlight neighborhoods={impactedNeighborhoods} />
+            </main>
+            <Sidebar neighborhoods={popularNeighborhoods} />
+          </div>
+
+          {/* See All Development CTA Section */}
+          <SeeAllCTA />
+
+          {/* Footer */}
+          <Footer />
+        </>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
