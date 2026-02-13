@@ -1,0 +1,9 @@
+{
+  "name": "city-vibes-views",
+  "version": "2.0.0",
+  "private": true,
+  "description": "City-agnostic AI-ready content platform",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

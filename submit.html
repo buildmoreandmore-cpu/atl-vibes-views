@@ -13,7 +13,9 @@
   <meta property="og:site_name" content="ATL Vibes & Views">
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="/js/geodir-api.js"></script>
+  <script src="/js/site-config.js"></script>
+  <script src="/js/site-renderer.js"></script>
+  <script src="/js/platform-api.js"></script>
   <style>
     :root {
       --primary-yellow: #FFD95A;
@@ -902,6 +904,10 @@
 
       try {
         const result = await GeoDirectoryAPI.submitBusiness(submissionData);
+
+        // Form submission logged
+        console.log('Form submitted:', { formType: 'business', ...data });
+
         showSuccess();
       } catch (error) {
         showError('Submission failed: ' + error.message);
@@ -942,6 +948,10 @@
 
       try {
         const result = await GeoDirectoryAPI.submitEvent(submissionData);
+
+        // Form submission logged
+        console.log('Form submitted:', { formType: 'event', ...data });
+
         showSuccess();
       } catch (error) {
         showError('Submission failed: ' + error.message);
@@ -969,5 +979,6 @@
     // Load categories on page load
     loadCategories();
   </script>
+
 </body>
 </html>

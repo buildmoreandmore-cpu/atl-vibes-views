@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - ATL Vibes & Views</title>
-  <meta name="description" content="Get in touch with ATL Vibes & Views. Contact us for partnerships, business listings, event submissions, or general inquiries.">
+  <title>Help & Support - ATL Vibes & Views</title>
+  <meta name="description" content="Get help with ATL Vibes & Views. Submit a support ticket for business listings, event submissions, technical issues, or general inquiries.">
+  <link rel="canonical" href="https://atlvibesandviews.com/support.html">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="/js/site-config.js"></script>
   <script src="/js/site-renderer.js"></script>
@@ -121,33 +122,33 @@
       margin: 0 auto;
     }
 
-    /* Contact Section */
-    .contact-section {
+    /* Support Section */
+    .support-section {
       padding: 5rem 5%;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .contact-grid {
+    .support-grid {
       display: grid;
       grid-template-columns: 1fr 400px;
       gap: 4rem;
     }
 
-    /* Contact Form */
-    .contact-form-container {
+    /* Support Form */
+    .support-form-container {
       background: white;
       padding: 2.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     }
 
-    .contact-form-container h2 {
+    .support-form-container h2 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
     }
 
-    .contact-form-container .subtitle {
+    .support-form-container .subtitle {
       color: var(--text-light);
       margin-bottom: 2rem;
     }
@@ -156,11 +157,21 @@
       margin-bottom: 1.5rem;
     }
 
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
     .form-group label {
       display: block;
       font-weight: 600;
       margin-bottom: 0.5rem;
       font-size: 0.9rem;
+    }
+
+    .form-group label .required {
+      color: var(--primary-red);
     }
 
     .form-group input,
@@ -188,6 +199,12 @@
       resize: vertical;
     }
 
+    .help-text {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+
     .submit-btn {
       width: 100%;
       background: var(--primary-red);
@@ -208,8 +225,83 @@
       transform: translateY(-2px);
     }
 
-    /* Contact Info */
-    .contact-info {
+    .submit-btn:disabled {
+      background: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: #22c55e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: white;
+    }
+
+    .success-message h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .success-message p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .success-message a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary-yellow);
+      color: var(--primary-black);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .success-message a:hover {
+      background: #e6c24e;
+    }
+
+    /* Error Message */
+    .error-message {
+      display: none;
+      padding: 1rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      color: #dc2626;
+      margin-bottom: 1.5rem;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* Help Info */
+    .help-info {
       display: flex;
       flex-direction: column;
       gap: 2rem;
@@ -243,113 +335,59 @@
       text-decoration: underline;
     }
 
-    .social-section h4 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      color: var(--text-dark);
-      font-family: 'Source Sans 3', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+    .info-card ul {
+      list-style: none;
+      margin-top: 1rem;
     }
 
-    .social-links {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .social-link {
-      width: 44px;
-      height: 44px;
-      background: var(--primary-black);
-      color: white;
+    .info-card ul li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
-      transition: all 0.3s;
+      gap: 0.5rem;
     }
 
-    .social-link:hover {
-      background: var(--primary-red);
-      transform: translateY(-2px);
+    .info-card ul li:last-child {
+      border-bottom: none;
     }
 
-    /* Quick Links */
-    .quick-links {
-      padding: 5rem 5%;
-      background: #f8f8f8;
+    .info-card ul li::before {
+      content: '•';
+      color: var(--primary-yellow);
+      font-weight: bold;
     }
 
-    .quick-links-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .quick-links-header h2 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .quick-links-header p {
-      color: var(--text-light);
-    }
-
-    .quick-links-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .quick-link-card {
-      background: white;
-      padding: 2.5rem 2rem;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      transition: transform 0.3s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .quick-link-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .quick-link-icon {
-      width: 60px;
-      height: 60px;
+    /* FAQ Preview */
+    .faq-preview {
       background: var(--secondary-yellow);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.25rem;
-      font-size: 1.5rem;
+      padding: 2rem;
+      border-radius: 12px;
     }
 
-    .quick-link-card h3 {
+    .faq-preview h3 {
       font-size: 1.3rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
       color: var(--primary-black);
     }
 
-    .quick-link-card p {
-      color: var(--text-light);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+    .faq-item {
+      margin-bottom: 1.25rem;
     }
 
-    .quick-link-card .link-text {
-      color: var(--primary-red);
+    .faq-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-question {
       font-weight: 600;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .faq-answer {
+      font-size: 0.9rem;
+      color: var(--text-light);
     }
 
     /* Footer */
@@ -391,6 +429,14 @@
       height: 36px;
       background: var(--primary-yellow);
       color: var(--primary-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: all 0.3s;
     }
 
     .footer .social-link:hover {
@@ -445,14 +491,9 @@
 
     /* Responsive */
     @media (max-width: 968px) {
-      .contact-grid {
+      .support-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
-      }
-
-      .quick-links-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
       }
 
       .footer-content {
@@ -474,6 +515,10 @@
         font-size: 2.5rem;
       }
 
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
       .footer-content {
         grid-template-columns: 1fr;
       }
@@ -491,131 +536,130 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
       <li><a href="index.html#directory">Directory</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <h1>Contact Us</h1>
-    <p>Have a question, story tip, or partnership inquiry? We'd love to hear from you.</p>
+    <h1>Help & Support</h1>
+    <p>Having an issue with your listing or need assistance? We're here to help.</p>
   </section>
 
-  <!-- Contact Section -->
-  <section class="contact-section">
-    <div class="contact-grid">
-      <!-- Contact Form -->
-      <div class="contact-form-container">
-        <h2>Send Us a Message</h2>
-        <p class="subtitle">We typically respond within 1-2 business days</p>
+  <!-- Support Section -->
+  <section class="support-section">
+    <div class="support-grid">
+      <!-- Support Form -->
+      <div class="support-form-container">
+        <div id="formContainer">
+          <h2>Submit a Support Ticket</h2>
+          <p class="subtitle">Describe your issue and we'll get back to you within 24-48 hours</p>
 
-        <!-- Error Message -->
-        <div class="error-message" id="errorMessage" style="display: none; padding: 1rem; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; color: #dc2626; margin-bottom: 1.5rem;"></div>
+          <!-- Error Message -->
+          <div class="error-message" id="errorMessage"></div>
 
-        <form id="contactForm">
-          <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div>
-              <label for="firstname">First Name *</label>
-              <input type="text" id="firstname" name="firstname" required placeholder="John">
+          <form id="supportForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstname">First Name <span class="required">*</span></label>
+                <input type="text" id="firstname" name="firstname" required placeholder="John">
+              </div>
+              <div class="form-group">
+                <label for="lastname">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastname" name="lastname" required placeholder="Smith">
+              </div>
             </div>
-            <div>
-              <label for="lastname">Last Name *</label>
-              <input type="text" id="lastname" name="lastname" required placeholder="Smith">
+
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="john@example.com">
+              <p class="help-text">Use the same email you used for your listing submission</p>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" required placeholder="john@example.com">
-          </div>
+            <div class="form-group">
+              <label for="issue_type">Issue Type <span class="required">*</span></label>
+              <select id="issue_type" name="issue_type" required>
+                <option value="">Select an issue type...</option>
+                <option value="Business Listing Issue">Business Listing Issue</option>
+                <option value="Event Listing Issue">Event Listing Issue</option>
+                <option value="Update My Listing">Update My Listing</option>
+                <option value="Remove My Listing">Remove My Listing</option>
+                <option value="Technical Issue">Technical Issue</option>
+                <option value="Account Access">Account Access</option>
+                <option value="Billing / Advertising">Billing / Advertising</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label for="subject">Subject *</label>
-            <select id="subject" name="subject" required>
-              <option value="">Select a topic...</option>
-              <option value="General Inquiry">General Inquiry</option>
-              <option value="Partnership/Advertising">Partnership & Advertising</option>
-              <option value="Business Listing">Submit Business Listing</option>
-              <option value="Event Submission">Event Submission</option>
-              <option value="Story Tip">Story Tip or Press Release</option>
-              <option value="Technical Issue">Technical Issue</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="subject">Subject <span class="required">*</span></label>
+              <input type="text" id="subject" name="subject" required placeholder="Brief summary of your issue">
+            </div>
 
-          <div class="form-group">
-            <label for="message">Message *</label>
-            <textarea id="message" name="message" required placeholder="Tell us more about your inquiry..."></textarea>
-          </div>
+            <div class="form-group">
+              <label for="description">Description <span class="required">*</span></label>
+              <textarea id="description" name="description" required placeholder="Please describe your issue in detail. Include any relevant information such as your business/event name, what you expected to happen, and what actually happened."></textarea>
+            </div>
 
-          <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
-        </form>
+            <div class="form-group">
+              <label for="page_url">Related Page URL</label>
+              <input type="url" id="page_url" name="page_url" placeholder="https://atlvibesandviews.com/...">
+              <p class="help-text">Optional: Link to the page where you're experiencing the issue</p>
+            </div>
+
+            <input type="hidden" id="previous_submission" name="previous_submission" value="">
+
+            <button type="submit" class="submit-btn" id="submitBtn">Submit Ticket</button>
+          </form>
+        </div>
 
         <!-- Success Message -->
-        <div id="successMessage" style="display: none; text-align: center; padding: 2rem;">
-          <div style="width: 60px; height: 60px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-            <svg viewBox="0 0 24 24" style="width: 30px; height: 30px; fill: white;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        <div class="success-message" id="successMessage">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
           </div>
-          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Message Sent!</h3>
-          <p style="color: var(--text-light);">Thank you for reaching out. We'll get back to you within 1-2 business days.</p>
+          <h3>Ticket Submitted!</h3>
+          <p>We've received your support request and will get back to you within 24-48 hours. Check your email for a confirmation.</p>
+          <a href="index.html">Return Home</a>
         </div>
       </div>
 
-      <!-- Contact Info -->
-      <div class="contact-info">
+      <!-- Help Info -->
+      <div class="help-info">
         <div class="info-card">
-          <h3>Contact Information</h3>
-          <p><strong>Email:</strong><br>
-          <a href="mailto:hello@atlvibesandviews.com">hello@atlvibesandviews.com</a></p>
-          <p style="margin-top: 1rem;"><strong>Partnerships:</strong><br>
-          <a href="mailto:partnerships@atlvibesandviews.com">partnerships@atlvibesandviews.com</a></p>
+          <h3>Before You Submit</h3>
+          <p>You might find answers to common questions:</p>
+          <ul>
+            <li>Listing approval takes 1-3 business days</li>
+            <li>Edits require a new submission</li>
+            <li>Free listings appear after review</li>
+            <li>Featured spots require advertising</li>
+          </ul>
         </div>
 
         <div class="info-card">
-          <h3>Mailing Address</h3>
-          <p>ATL Vibes & Views<br>
-          3355 Lenox Rd, Ste 750<br>
-          Atlanta, GA 30326</p>
+          <h3>Quick Links</h3>
+          <p><a href="submit.html">Submit a New Listing</a></p>
+          <p><a href="advertise.html">Advertising Options</a></p>
+          <p><a href="contact.html">General Inquiries</a></p>
         </div>
 
-        <div class="info-card social-section">
-          <h4>Follow Us</h4>
-          <div class="social-links">
-            <a href="https://www.instagram.com/atlvibesandviews/" class="social-link" target="_blank" rel="noopener noreferrer">IG</a>
-            <a href="#" class="social-link">FB</a>
-            <a href="#" class="social-link">TW</a>
-            <a href="#" class="social-link">YT</a>
+        <div class="faq-preview">
+          <h3>Common Questions</h3>
+          <div class="faq-item">
+            <p class="faq-question">How long until my listing is approved?</p>
+            <p class="faq-answer">Most listings are reviewed within 1-3 business days.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-question">Can I edit my listing after submission?</p>
+            <p class="faq-answer">Yes! Submit a support ticket with your requested changes.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-question">How do I get featured placement?</p>
+            <p class="faq-answer">Check our <a href="advertise.html">advertising options</a> for premium placement.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Quick Links -->
-  <section class="quick-links">
-    <div class="quick-links-header">
-      <h2>Looking For Something Specific?</h2>
-      <p>Quick links to common requests</p>
-    </div>
-    <div class="quick-links-grid">
-      <a href="advertise.html" class="quick-link-card">
-        <div class="quick-link-icon">📢</div>
-        <h3>Advertise</h3>
-        <p>Partner with us to reach Atlanta's most engaged audience</p>
-        <span class="link-text">View Packages →</span>
-      </a>
-      <a href="submit.html" class="quick-link-card">
-        <div class="quick-link-icon">🏪</div>
-        <h3>Submit Listing</h3>
-        <p>Add your business or event to our directory</p>
-        <span class="link-text">Get Listed →</span>
-      </a>
-      <a href="media-kit.html" class="quick-link-card">
-        <div class="quick-link-icon">📊</div>
-        <h3>Media Kit</h3>
-        <p>Download our media kit for partnership details</p>
-        <span class="link-text">Download →</span>
-      </a>
     </div>
   </section>
 
@@ -678,8 +722,9 @@
   </footer>
 
   <script>
-    // Contact Form Submission
-    const form = document.getElementById('contactForm');
+    // Support Form Submission
+    const form = document.getElementById('supportForm');
+    const formContainer = document.getElementById('formContainer');
     const successMessage = document.getElementById('successMessage');
     const errorMessage = document.getElementById('errorMessage');
     const submitBtn = document.getElementById('submitBtn');
@@ -688,36 +733,39 @@
       e.preventDefault();
 
       // Hide any previous error
-      errorMessage.style.display = 'none';
+      errorMessage.classList.remove('show');
 
       // Disable submit button
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+      submitBtn.textContent = 'Submitting...';
 
       // Gather form data
       const formData = {
-        formType: 'contact',
+        formType: 'support',
         firstname: document.getElementById('firstname').value,
         lastname: document.getElementById('lastname').value,
         email: document.getElementById('email').value,
+        issue_type: document.getElementById('issue_type').value,
         subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value,
+        description: document.getElementById('description').value,
+        page_url: document.getElementById('page_url').value || window.location.href,
+        previous_submission: document.getElementById('previous_submission').value,
         pageUri: window.location.href,
         pageName: document.title
       };
 
       try {
-          console.log('Form submitted:', { formType: 'contact', ...formData });
+          console.log('Form submitted:', { formType: 'support', ...formData });
 
-          // Hide form, show success
-          form.style.display = 'none';
-          successMessage.style.display = 'block';
+          // Show success message
+          formContainer.style.display = 'none';
+          successMessage.classList.add('show');
       } catch (error) {
-        console.error('Contact form error:', error);
-        errorMessage.textContent = 'Sorry, there was a problem sending your message. Please try again or email us directly.';
-        errorMessage.style.display = 'block';
+        console.error('Support form error:', error);
+        errorMessage.textContent = 'Sorry, there was a problem submitting your ticket. Please try again or email us directly at hello@atlvibesandviews.com';
+        errorMessage.classList.add('show');
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
+        submitBtn.textContent = 'Submit Ticket';
       }
     });
   </script>

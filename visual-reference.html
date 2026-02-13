@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATL Vibes & Views - Visual Reference Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="/js/site-config.js"></script>
+  <script src="/js/site-renderer.js"></script>
+  <script src="/js/platform-api.js"></script>
+  <style>
+    :root {
+      --primary-yellow: #FFD95A;
+      --primary-red: #DC3535;
+      --primary-black: #0A0A0A;
+      --primary-white: #FAFAFA;
+      --secondary-yellow: #FFF4D6;
+      --accent-red: #A82B2B;
+      --text-dark: #1A1A1A;
+      --text-light: #6B6B6B;
+      --border-color: #E5E5E5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: #fff;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Cover Page */
+    .cover {
+      min-height: 60vh;
+      background: linear-gradient(135deg, var(--primary-black) 0%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1555992336-03a23c7b20ee?w=1600') center/cover;
+      opacity: 0.15;
+    }
+
+    .cover-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .cover-tagline {
+      font-size: 0.9rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--primary-yellow);
+      margin-bottom: 2rem;
+    }
+
+    .cover-title {
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding: 1rem 0;
+    }
+
+    /* Sections */
+    .section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .section-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--primary-red);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-black);
+    }
+
+    .section-intro {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+
+    /* Page Preview with Iframe */
+    .page-preview {
+      margin-bottom: 4rem;
+      page-break-inside: avoid;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--primary-yellow);
+    }
+
+    .page-header h3 {
+      font-size: 1.5rem;
+      color: var(--primary-black);
+    }
+
+    .page-url {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      background: #f0f0f0;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+    }
+
+    .page-description {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .iframe-container {
+      position: relative;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+
+    .iframe-container iframe {
+      width: 100%;
+      height: 700px;
+      border: none;
+      display: block;
+    }
+
+    .iframe-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .iframe-overlay:hover {
+      background: rgba(0,0,0,0.02);
+    }
+
+    /* Color Palette */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .color-swatch {
+      text-align: center;
+    }
+
+    .color-box {
+      width: 100%;
+      height: 100px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .color-name {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .color-hex {
+      font-family: monospace;
+      color: var(--text-light);
+      font-size: 0.85rem;
+    }
+
+    /* Typography */
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .type-sample {
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    .type-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--primary-red);
+      margin-bottom: 1rem;
+    }
+
+    .type-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--primary-black);
+    }
+
+    .type-body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    /* Sitemap */
+    .sitemap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .sitemap-group {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    .sitemap-group h4 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-yellow);
+    }
+
+    .sitemap-group ul {
+      list-style: none;
+    }
+
+    .sitemap-group li {
+      padding: 0.3rem 0;
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-red);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+    }
+
+    /* Print */
+    @media print {
+      .cover { min-height: auto; padding: 3rem; }
+      .section { padding: 2rem 0; }
+      .iframe-container iframe { height: 500px; }
+      .page-preview { page-break-after: always; }
+    }
+
+    @media (max-width: 768px) {
+      .color-grid, .sitemap-grid, .stats-grid, .type-grid {
+        grid-template-columns: 1fr;
+      }
+      .cover-logo { font-size: 2rem; }
+      .iframe-container iframe { height: 400px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-content">
+      <div class="cover-logo">ATL VIBES & VIEWS</div>
+      <div class="cover-tagline">Atlanta's Neighborhood & Culture Magazine</div>
+      <h1 class="cover-title">Website Visual Reference Guide</h1>
+    </div>
+  </div>
+
+  <!-- Brand Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="section-number">01 / Overview</div>
+      <h2 class="section-title">Brand & Site Summary</h2>
+      <p class="section-intro">ATL Vibes & Views is Atlanta's premier hyperlocal media platform covering culture, development, real estate, and community across 243 neighborhoods.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">243</div>
+          <div class="stat-label">Neighborhoods</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">11</div>
+          <div class="stat-label">Area Guides</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Pages</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">6M+</div>
+          <div class="stat-label">Metro Pop.</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem; margin-bottom: 1rem;">Color Palette</h3>
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="color-box" style="background: #FFD95A;"></div>
+          <div class="color-name">Primary Yellow</div>
+          <div class="color-hex">#FFD95A</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background: #DC3535;"></div>
+          <div class="color-name">Primary Red</div>
+          <div class="color-hex">#DC3535</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background: #0A0A0A;"></div>
+          <div class="color-name">Primary Black</div>
+          <div class="color-hex">#0A0A0A</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background: #FAFAFA; border: 1px solid #e5e5e5;"></div>
+          <div class="color-name">Primary White</div>
+          <div class="color-hex">#FAFAFA</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-box" style="background: #FFF4D6;"></div>
+          <div class="color-name">Secondary Yellow</div>
+          <div class="color-hex">#FFF4D6</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem; margin-bottom: 1rem;">Typography</h3>
+      <div class="type-grid">
+        <div class="type-sample">
+          <div class="type-label">Headlines</div>
+          <div class="type-heading">Cormorant Garamond</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">Body Text</div>
+          <div class="type-body">Source Sans 3 for all body copy, navigation, and UI elements.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Previews -->
+  <section class="section">
+    <div class="container">
+      <div class="section-number">02 / Page Previews</div>
+      <h2 class="section-title">Live Page Screenshots</h2>
+      <p class="section-intro">Embedded views of each page showing the actual design and content.</p>
+
+      <!-- Homepage -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>Homepage</h3>
+          <span class="page-url">index.html</span>
+        </div>
+        <p class="page-description">Main landing page featuring neighborhood spotlights, events calendar, property listings, business directory, and newsletter signup.</p>
+        <div class="iframe-container">
+          <iframe src="index.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('index.html', '_blank')"></div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>About Us</h3>
+          <span class="page-url">about.html</span>
+        </div>
+        <p class="page-description">Brand story, mission statement, team information, and company background.</p>
+        <div class="iframe-container">
+          <iframe src="about.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('about.html', '_blank')"></div>
+        </div>
+      </div>
+
+      <!-- Neighborhood Guide -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>Neighborhood Guide (Example: Buckhead)</h3>
+          <span class="page-url">buckhead.html</span>
+        </div>
+        <p class="page-description">In-depth neighborhood profile with demographics, restaurants, attractions, real estate data, and local culture highlights.</p>
+        <div class="iframe-container">
+          <iframe src="buckhead.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('buckhead.html', '_blank')"></div>
+        </div>
+      </div>
+
+      <!-- Properties -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>Properties</h3>
+          <span class="page-url">properties.html</span>
+        </div>
+        <p class="page-description">Real estate listings page with IDX integration for MLS property search across Atlanta neighborhoods.</p>
+        <div class="iframe-container">
+          <iframe src="properties.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('properties.html', '_blank')"></div>
+        </div>
+      </div>
+
+      <!-- Events -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>Events Calendar</h3>
+          <span class="page-url">events.html</span>
+        </div>
+        <p class="page-description">Community events, festivals, concerts, and local happenings across Atlanta.</p>
+        <div class="iframe-container">
+          <iframe src="events.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('events.html', '_blank')"></div>
+        </div>
+      </div>
+
+      <!-- Directory -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>Business Directory</h3>
+          <span class="page-url">directory.html</span>
+        </div>
+        <p class="page-description">Searchable directory of local businesses, restaurants, services, and attractions.</p>
+        <div class="iframe-container">
+          <iframe src="directory.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('directory.html', '_blank')"></div>
+        </div>
+      </div>
+
+      <!-- Advertise -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>Advertise</h3>
+          <span class="page-url">advertise.html</span>
+        </div>
+        <p class="page-description">Advertising packages, sponsorship opportunities, and partnership information for businesses.</p>
+        <div class="iframe-container">
+          <iframe src="advertise.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('advertise.html', '_blank')"></div>
+        </div>
+      </div>
+
+      <!-- Media Kit -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>Media Kit</h3>
+          <span class="page-url">media-kit.html</span>
+        </div>
+        <p class="page-description">Professional media kit with audience demographics, advertising rates, and brand guidelines.</p>
+        <div class="iframe-container">
+          <iframe src="media-kit.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('media-kit.html', '_blank')"></div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="page-preview">
+        <div class="page-header">
+          <h3>Contact</h3>
+          <span class="page-url">contact.html</span>
+        </div>
+        <p class="page-description">Contact form and information for inquiries, partnerships, and support.</p>
+        <div class="iframe-container">
+          <iframe src="contact.html" loading="lazy"></iframe>
+          <div class="iframe-overlay" onclick="window.open('contact.html', '_blank')"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Site Structure -->
+  <section class="section">
+    <div class="container">
+      <div class="section-number">03 / Site Structure</div>
+      <h2 class="section-title">Complete Sitemap</h2>
+
+      <div class="sitemap-grid">
+        <div class="sitemap-group">
+          <h4>Main Pages</h4>
+          <ul>
+            <li>index.html (Home)</li>
+            <li>about.html</li>
+            <li>contact.html</li>
+            <li>events.html</li>
+            <li>properties.html</li>
+            <li>directory.html</li>
+          </ul>
+        </div>
+        <div class="sitemap-group">
+          <h4>Neighborhoods</h4>
+          <ul>
+            <li>neighborhood.html (Hub)</li>
+            <li>buckhead.html</li>
+            <li>midtown.html</li>
+            <li>downtown.html</li>
+            <li>eastside.html</li>
+            <li>westside.html</li>
+            <li>north-atlanta.html</li>
+            <li>south-atlanta.html</li>
+            <li>southeast.html</li>
+            <li>southwest.html</li>
+          </ul>
+        </div>
+        <div class="sitemap-group">
+          <h4>Business</h4>
+          <ul>
+            <li>advertise.html</li>
+            <li>media-kit.html</li>
+            <li>submit.html</li>
+            <li>activation.html</li>
+            <li>development.html</li>
+          </ul>
+        </div>
+        <div class="sitemap-group">
+          <h4>Legal & Other</h4>
+          <ul>
+            <li>terms.html</li>
+            <li>privacy.html</li>
+            <li>cookies.html</li>
+            <li>support.html</li>
+            <li>404.html</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--primary-black); color: white; padding: 2rem; text-align: center;">
+    <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; letter-spacing: 0.15em; margin-bottom: 0.5rem;">ATL VIBES & VIEWS</div>
+    <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem;">Visual Reference Guide | atlvibesandviews.com</p>
+  </footer>
+
+</body>
+</html>

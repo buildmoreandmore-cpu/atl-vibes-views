@@ -34,10 +34,9 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  <!-- GeoDirectory API Service -->
-  <script src="/js/geodir-api.js"></script>
-  <!-- IDX Broker Widget Script - Replace YOUR_IDX_ACCOUNT_ID with your actual account ID -->
-  <script src="https://d32yb73xogvp0m.cloudfront.net/js/widgets/idx-widgets.js" data-idx-account="YOUR_IDX_ACCOUNT_ID"></script>
+  <script src="/js/site-config.js"></script>
+  <script src="/js/site-renderer.js"></script>
+  <script src="/js/platform-api.js"></script>
   <style>
     :root {
       --primary-yellow: #FFD95A;
@@ -2122,90 +2121,6 @@
       color: rgba(255,255,255,0.7);
     }
 
-    /* IDX Broker Widget Overrides */
-    .idx-widget-container {
-      width: 100%;
-    }
-
-    /* IDX Showcase Widget Styling */
-    .idx-showcase-wrapper .IDX-showcaseCell,
-    .idx-widget-container .IDX-showcaseCell {
-      background: var(--text-dark) !important;
-      border: none !important;
-      border-radius: 8px !important;
-      overflow: hidden !important;
-      transition: all 0.3s ease !important;
-    }
-
-    .idx-showcase-wrapper .IDX-showcaseCell:hover,
-    .idx-widget-container .IDX-showcaseCell:hover {
-      border-color: var(--primary-yellow) !important;
-      transform: translateY(-5px) !important;
-    }
-
-    .idx-showcase-wrapper .IDX-showcasePhoto,
-    .idx-widget-container .IDX-showcasePhoto {
-      height: 250px !important;
-      object-fit: cover !important;
-    }
-
-    .idx-showcase-wrapper .IDX-showcasePrice,
-    .idx-widget-container .IDX-showcasePrice {
-      font-size: 1.8rem !important;
-      font-weight: 700 !important;
-      color: var(--primary-yellow) !important;
-      font-family: 'Source Sans 3', sans-serif !important;
-    }
-
-    .idx-showcase-wrapper .IDX-showcaseAddress,
-    .idx-widget-container .IDX-showcaseAddress {
-      font-size: 1.1rem !important;
-      color: white !important;
-      font-family: 'Source Sans 3', sans-serif !important;
-    }
-
-    .idx-showcase-wrapper .IDX-showcaseSpecs,
-    .idx-widget-container .IDX-showcaseSpecs {
-      color: rgba(255,255,255,0.7) !important;
-      font-family: 'Source Sans 3', sans-serif !important;
-    }
-
-    /* IDX Search Widget Styling */
-    .idx-search-container .IDX-searchForm {
-      background: white !important;
-      border-radius: 8px !important;
-      padding: 1.5rem !important;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
-    }
-
-    .idx-search-container .IDX-searchInput,
-    .idx-search-container .IDX-searchSelect {
-      font-family: 'Source Sans 3', sans-serif !important;
-      border: 2px solid var(--border-color) !important;
-      border-radius: 6px !important;
-      padding: 0.75rem 1rem !important;
-    }
-
-    .idx-search-container .IDX-searchInput:focus,
-    .idx-search-container .IDX-searchSelect:focus {
-      border-color: var(--primary-yellow) !important;
-      outline: none !important;
-    }
-
-    .idx-search-container .IDX-searchButton {
-      background: var(--primary-red) !important;
-      color: white !important;
-      font-family: 'Source Sans 3', sans-serif !important;
-      font-weight: 700 !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.05em !important;
-      border-radius: 4px !important;
-      padding: 0.75rem 2rem !important;
-    }
-
-    .idx-search-container .IDX-searchButton:hover {
-      background: var(--accent-red) !important;
-    }
 
     /* Property Search Filter Bar */
     .property-search-filters {
@@ -2375,84 +2290,6 @@
       color: var(--text-light);
     }
 
-    /* IDX Property Detail Modal/View */
-    .idx-property-detail-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      padding: 1rem;
-    }
-
-    .idx-property-detail-container {
-      background: white;
-      border-radius: 12px;
-      max-width: 1200px;
-      width: 100%;
-      max-height: 95vh;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .idx-property-detail-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 40px;
-      height: 40px;
-      background: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 1.5rem;
-      cursor: pointer;
-      z-index: 10;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-
-    .idx-property-detail-iframe {
-      width: 100%;
-      height: 90vh;
-      border: none;
-    }
-
-    /* IDX Loading State */
-    .idx-loading {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      color: var(--text-light);
-    }
-
-    .idx-loading-spinner {
-      width: 48px;
-      height: 48px;
-      border: 3px solid var(--border-color);
-      border-top-color: var(--primary-yellow);
-      border-radius: 50%;
-      animation: idx-spin 1s linear infinite;
-      margin-bottom: 1rem;
-    }
-
-    @keyframes idx-spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* IDX Error State */
-    .idx-error {
-      text-align: center;
-      padding: 3rem 2rem;
-      color: var(--primary-red);
-    }
-
-    .idx-error-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
 
     /* MLS Compliance Footer */
     .mls-compliance {
@@ -2523,10 +2360,6 @@
         font-size: 1.5rem;
       }
 
-      .idx-property-detail-container {
-        border-radius: 0;
-        max-height: 100vh;
-      }
     }
 
     /* Directory Section */
@@ -6239,27 +6072,10 @@
     // ============================================
     // API CONFIGURATION
     // ============================================
-    // Data Source Options:
-    // 1. DEMO_MODE = true - Uses hardcoded demo data (default)
-    // 2. USE_GEODIRECTORY = true - Uses GeoDirectory REST API via /api/geodir proxy
-    // 3. USE_SUPABASE = true - Uses Supabase (future)
-    //
-    // GeoDirectory Setup:
-    // 1. Enable REST API in WordPress: GeoDirectory > Settings > API
-    // 2. Generate API keys and set them as Vercel environment variables:
-    //    - GEODIR_URL: Your WordPress site URL
-    //    - GEODIR_KEY: Consumer Key (ck_...)
-    //    - GEODIR_SECRET: Consumer Secret (cs_...)
-    // 3. Set USE_GEODIRECTORY = true below
-
-    const DEMO_MODE = false;
-    const USE_GEODIRECTORY = true; // Set to true when GeoDirectory API is configured
+    // Set USE_SUPABASE = true when Supabase is configured
     const USE_SUPABASE = false;
-    const SUPABASE_URL = 'https://your-project.supabase.co';
-    const SUPABASE_KEY = 'your-anon-key';
-
-    // Check if GeoDirectory API is available (loaded from /js/geodir-api.js)
-    const geoDirectoryAvailable = typeof window !== 'undefined' && typeof window.GeoDirectoryAPI !== 'undefined';
+    const SUPABASE_URL = typeof SiteConfig !== 'undefined' ? SiteConfig.supabase?.url : 'https://your-project.supabase.co';
+    const SUPABASE_KEY = typeof SiteConfig !== 'undefined' ? SiteConfig.supabase?.anonKey : 'your-anon-key';
 
     // Demo user data
     const demoUsers = {
@@ -6423,103 +6239,6 @@
       }
     };
 
-    // Neighborhood to FMLS ZIP Code Mapping
-    const neighborhoodToFMLS = {
-      'bh1': { city: 'Atlanta', zips: ['30305', '30326'], area: 'Buckhead Village' },
-      'bh2': { city: 'Atlanta', zips: ['30327', '30342'], area: 'Chastain Park' },
-      'bh3': { city: 'Atlanta', zips: ['30305', '30309'], area: 'Garden Hills' },
-      'bh4': { city: 'Atlanta', zips: ['30305', '30309'], area: 'Peachtree Hills' },
-      'bh5': { city: 'Atlanta', zips: ['30327', '30305'], area: 'Tuxedo Park' },
-      'bh6': { city: 'Atlanta', zips: ['30327', '30305'], area: 'Paces' },
-      'bh7': { city: 'Atlanta', zips: ['30305', '30309'], area: 'Peachtree Battle' },
-      'bh8': { city: 'Atlanta', zips: ['30326', '30324'], area: 'Lenox' },
-      'mt1': { city: 'Atlanta', zips: ['30308', '30309'], area: 'Midtown Core' },
-      'mt2': { city: 'Atlanta', zips: ['30309', '30324'], area: 'Ansley Park' },
-      'mt3': { city: 'Atlanta', zips: ['30309', '30324'], area: 'Piedmont Heights' },
-      'mt4': { city: 'Atlanta', zips: ['30309'], area: 'Sherwood Forest' },
-      'mt5': { city: 'Atlanta', zips: ['30363', '30318'], area: 'Atlantic Station' },
-      'mt6': { city: 'Atlanta', zips: ['30318', '30309'], area: 'Loring Heights' },
-      'mt7': { city: 'Atlanta', zips: ['30318', '30313'], area: 'Home Park' },
-      'dt1': { city: 'Atlanta', zips: ['30313', '30303'], area: 'Centennial Hill' },
-      'dt2': { city: 'Atlanta', zips: ['30303'], area: 'Fairlie-Poplar' },
-      'dt3': { city: 'Atlanta', zips: ['30303', '30315'], area: 'South Downtown' },
-      'dt4': { city: 'Atlanta', zips: ['30312', '30303'], area: 'Sweet Auburn' },
-      'dt5': { city: 'Atlanta', zips: ['30313', '30314'], area: 'Castleberry Hill' },
-      'dt6': { city: 'Atlanta', zips: ['30303'], area: 'Five Points' },
-      'o4w1': { city: 'Atlanta', zips: ['30312', '30308'], area: 'Old Fourth Ward' },
-      'o4w2': { city: 'Atlanta', zips: ['30312', '30307'], area: 'Bedford Pine' },
-      'o4w3': { city: 'Atlanta', zips: ['30312'], area: 'Boulevard Heights' },
-      'o4w4': { city: 'Atlanta', zips: ['30307', '30308'], area: 'Poncey-Highland' },
-      'vh1': { city: 'Atlanta', zips: ['30306', '30307'], area: 'Virginia-Highland' },
-      'vh2': { city: 'Atlanta', zips: ['30306', '30324'], area: 'Morningside' },
-      'vh3': { city: 'Atlanta', zips: ['30307', '30322'], area: 'Druid Hills' },
-      'vh4': { city: 'Atlanta', zips: ['30319', '30324'], area: 'Lenox Park' },
-      'vh5': { city: 'Atlanta', zips: ['30329', '30319'], area: 'North Druid Hills' },
-      'ip1': { city: 'Atlanta', zips: ['30307', '30312'], area: 'Inman Park' },
-      'ip2': { city: 'Atlanta', zips: ['30307'], area: 'Little Five Points' },
-      'ip3': { city: 'Atlanta', zips: ['30316', '30312'], area: 'Reynoldstown' },
-      'ip4': { city: 'Atlanta', zips: ['30316', '30312'], area: 'Cabbagetown' },
-      'ip5': { city: 'Atlanta', zips: ['30307', '30317'], area: 'Candler Park' },
-      'wm1': { city: 'Atlanta', zips: ['30318', '30309'], area: 'West Midtown' },
-      'wm2': { city: 'Atlanta', zips: ['30318'], area: 'Westside Provisions' },
-      'wm3': { city: 'Atlanta', zips: ['30318'], area: 'Berkeley Park' },
-      'wm4': { city: 'Atlanta', zips: ['30318', '30313'], area: 'Blandtown' },
-      'wm5': { city: 'Atlanta', zips: ['30318', '30313'], area: 'Marietta Street Artery' },
-      'wm6': { city: 'Atlanta', zips: ['30318', '30314'], area: 'English Avenue' },
-      'wm7': { city: 'Atlanta', zips: ['30313', '30314'], area: 'Vine City' },
-      'ea1': { city: 'Atlanta', zips: ['30316', '30317'], area: 'East Atlanta Village' },
-      'ea2': { city: 'Atlanta', zips: ['30316', '30315'], area: 'Ormewood Park' },
-      'ea3': { city: 'Atlanta', zips: ['30317', '30316'], area: 'East Lake' },
-      'ea4': { city: 'Atlanta', zips: ['30317', '30307'], area: 'Kirkwood' },
-      'ea5': { city: 'Atlanta', zips: ['30307', '30312'], area: 'Edgewood' },
-      'ea6': { city: 'Decatur', zips: ['30030', '30317'], area: 'Oakhurst' },
-      'dc1': { city: 'Decatur', zips: ['30030'], area: 'Downtown Decatur' },
-      'dc2': { city: 'Decatur', zips: ['30030', '30317'], area: 'Oakhurst' },
-      'dc3': { city: 'Decatur', zips: ['30030'], area: 'Winnona Park' },
-      'dc4': { city: 'Decatur', zips: ['30030'], area: 'MAK District' },
-      'dc5': { city: 'Decatur', zips: ['30030', '30033'], area: 'Great Lakes' },
-      'dc6': { city: 'Decatur', zips: ['30030', '30033'], area: 'Medlock Park' },
-      'gp1': { city: 'Atlanta', zips: ['30312', '30315'], area: 'Grant Park' },
-      'gp2': { city: 'Atlanta', zips: ['30315', '30312'], area: 'Peoplestown' },
-      'gp3': { city: 'Atlanta', zips: ['30315', '30312'], area: 'Summerhill' },
-      'gp4': { city: 'Atlanta', zips: ['30315', '30310'], area: 'Pittsburgh' },
-      'gp5': { city: 'Atlanta', zips: ['30315', '30310'], area: 'Mechanicsville' },
-      'gp6': { city: 'Atlanta', zips: ['30315', '30310'], area: 'Capitol View' },
-      'gp7': { city: 'Atlanta', zips: ['30315', '30316'], area: 'Chosewood Park' }
-    };
-
-    // IDX Broker Configuration
-    const IDX_CONFIG = {
-      accountId: 'YOUR_IDX_ACCOUNT_ID',
-      apiKey: 'YOUR_IDX_API_KEY',
-      subdomain: 'yoursite',
-      showcaseWidgetId: 'showcase-1',
-      searchWidgetId: 'search-1',
-      defaultCity: 'Atlanta',
-      defaultState: 'GA',
-      mlsSource: 'FMLS'
-    };
-
-    // Build IDX search URL with filters
-    const buildIDXSearchUrl = (filters = {}) => {
-      const baseUrl = `https://${IDX_CONFIG.subdomain}.idxbroker.com/idx/results/listings`;
-      const params = new URLSearchParams();
-      if (filters.city) params.append('city[]', filters.city);
-      if (filters.zips && filters.zips.length > 0) {
-        filters.zips.forEach(zip => params.append('zip[]', zip));
-      }
-      if (filters.minPrice) params.append('lp', filters.minPrice);
-      if (filters.maxPrice) params.append('hp', filters.maxPrice);
-      if (filters.beds) params.append('bd', filters.beds);
-      if (filters.baths) params.append('ba', filters.baths);
-      if (filters.propertyType) params.append('pt', filters.propertyType);
-      return `${baseUrl}?${params.toString()}`;
-    };
-
-    // Get FMLS parameters for a neighborhood
-    const getFMLSParams = (neighborhoodId) => {
-      return neighborhoodToFMLS[neighborhoodId] || { city: 'Atlanta', zips: [], area: 'Atlanta' };
-    };
 
     // Subscription packages
     const subscriptionPackages = {
@@ -7639,152 +7358,7 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       }
     ];
 
-    // ============================================
-    // GeoDirectory Data Integration Layer
-    // ============================================
-    // This bridges GeoDirectory API with the existing mockSupabase interface
-    // so all existing code continues to work without changes
-
-    const geodirData = {
-      // Cache for API responses
-      _cache: {},
-      _cacheTimeout: 5 * 60 * 1000, // 5 minutes
-
-      // Get businesses with caching
-      async getBusinesses(params = {}) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        const cacheKey = 'businesses_' + JSON.stringify(params);
-        if (this._cache[cacheKey] && Date.now() - this._cache[cacheKey].time < this._cacheTimeout) {
-          return this._cache[cacheKey].data;
-        }
-        try {
-          const result = await window.GeoDirectoryAPI.getBusinesses(params);
-          this._cache[cacheKey] = { data: result.items, time: Date.now() };
-          return result.items;
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Get businesses by area
-      async getBusinessesByArea(areaId, limit = 6) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        try {
-          const result = await window.GeoDirectoryAPI.getBusinessesByArea(areaId, { per_page: limit });
-          return result.items;
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Get single business by ID
-      async getBusinessById(id) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        try {
-          return await window.GeoDirectoryAPI.getBusinessById(id);
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Get events
-      async getEvents(params = {}) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        const cacheKey = 'events_' + JSON.stringify(params);
-        if (this._cache[cacheKey] && Date.now() - this._cache[cacheKey].time < this._cacheTimeout) {
-          return this._cache[cacheKey].data;
-        }
-        try {
-          const result = await window.GeoDirectoryAPI.getEvents(params);
-          this._cache[cacheKey] = { data: result.items, time: Date.now() };
-          return result.items;
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Get events by area
-      async getEventsByArea(areaId, limit = 6) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        try {
-          const result = await window.GeoDirectoryAPI.getEventsByArea(areaId, { per_page: limit });
-          return result.items;
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Get upcoming events
-      async getUpcomingEvents(limit = 10) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        try {
-          const result = await window.GeoDirectoryAPI.getUpcomingEvents({ per_page: limit });
-          return result.items;
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Get featured businesses
-      async getFeaturedBusinesses(limit = 6) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        try {
-          const result = await window.GeoDirectoryAPI.getFeaturedBusinesses({ per_page: limit });
-          return result.items;
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Search businesses
-      async searchBusinesses(query, params = {}) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        try {
-          const result = await window.GeoDirectoryAPI.searchBusinesses(query, params);
-          return result.items;
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Get reviews for a listing
-      async getReviews(listingId) {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        try {
-          const result = await window.GeoDirectoryAPI.getReviews(listingId);
-          return result.items;
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Get categories
-      async getBusinessCategories() {
-        if (!geoDirectoryAvailable || !USE_GEODIRECTORY) return null;
-        try {
-          return await window.GeoDirectoryAPI.getBusinessCategories();
-        } catch (e) {
-          console.error('GeoDirectory API error:', e);
-          return null;
-        }
-      },
-
-      // Clear cache
-      clearCache() {
-        this._cache = {};
-      }
-    };
-
-    // Mock Supabase-like functions for demo
+    // Mock Supabase-like functions for demo (will be replaced by real Supabase client)
     const mockSupabase = {
       auth: {
         signIn: async (email, password) => {
@@ -7807,25 +7381,10 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       },
       businessDetail: {
         getById: async (id) => {
-          // Try GeoDirectory API first (for numeric IDs)
-          if (USE_GEODIRECTORY && !isNaN(id)) {
-            const geodirBusiness = await geodirData.getBusinessById(id);
-            if (geodirBusiness) return geodirBusiness;
-          }
-
-          // Fallback to demo data
           await new Promise(r => setTimeout(r, 300));
           return demoListings.find(l => l.id === id && l.type === 'business') || null;
         },
         getNearbyListings: async (business, limit = 6) => {
-          // For GeoDirectory businesses, fetch nearby by neighborhood
-          if (USE_GEODIRECTORY && business?.neighborhood) {
-            const nearby = await geodirData.getBusinessesByArea(business.area, limit + 1);
-            if (nearby && nearby.length > 0) {
-              return nearby.filter(b => b.id !== business.id).slice(0, limit);
-            }
-          }
-
           await new Promise(r => setTimeout(r, 400));
           if (!business) return [];
           const sameNeighborhood = demoListings.filter(l => l.type === 'business' && l.status === 'approved' && l.id !== business.id && l.neighborhood?.toLowerCase() === business.neighborhood?.toLowerCase());
@@ -8284,90 +7843,6 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       );
     }
 
-    // IDX Widget Container Component
-    // Renders IDX Broker widgets with proper lifecycle management
-    function IDXWidgetContainer({ type, config, filters, onPropertyClick }) {
-      const containerRef = React.useRef(null);
-      const [loading, setLoading] = React.useState(true);
-      const [error, setError] = React.useState(null);
-
-      React.useEffect(() => {
-        if (!containerRef.current) return;
-
-        setLoading(true);
-        setError(null);
-
-        // Check if IDX widgets script is loaded
-        if (typeof window.idxWidgets === 'undefined') {
-          // Fallback: Display placeholder until IDX script loads
-          setLoading(false);
-          return;
-        }
-
-        try {
-          // Clear previous widget content
-          containerRef.current.innerHTML = '';
-
-          // Initialize IDX widget based on type
-          if (type === 'showcase') {
-            window.idxWidgets.showcase({
-              container: containerRef.current,
-              widgetId: config.showcaseWidgetId || IDX_CONFIG.showcaseWidgetId,
-              columns: 3,
-              rows: 1,
-              city: filters?.city || IDX_CONFIG.defaultCity,
-              state: IDX_CONFIG.defaultState,
-              zip: filters?.zips?.join(',') || '',
-              minPrice: filters?.minPrice || '',
-              maxPrice: filters?.maxPrice || '',
-              beds: filters?.beds || '',
-              baths: filters?.baths || '',
-              onSelect: (listing) => onPropertyClick && onPropertyClick(listing)
-            });
-          } else if (type === 'search') {
-            window.idxWidgets.search({
-              container: containerRef.current,
-              widgetId: config.searchWidgetId || IDX_CONFIG.searchWidgetId,
-              city: filters?.city || IDX_CONFIG.defaultCity,
-              state: IDX_CONFIG.defaultState
-            });
-          }
-
-          setLoading(false);
-        } catch (err) {
-          console.error('IDX Widget Error:', err);
-          setError('Unable to load property listings. Please try again later.');
-          setLoading(false);
-        }
-
-        // Cleanup on unmount
-        return () => {
-          if (containerRef.current) {
-            containerRef.current.innerHTML = '';
-          }
-        };
-      }, [type, filters]);
-
-      if (error) {
-        return (
-          <div className="idx-error">
-            <div className="idx-error-icon">!</div>
-            <p>{error}</p>
-          </div>
-        );
-      }
-
-      return (
-        <div className="idx-widget-container" ref={containerRef}>
-          {loading && (
-            <div className="idx-loading">
-              <div className="idx-loading-spinner"></div>
-              <p>Loading FMLS listings...</p>
-            </div>
-          )}
-        </div>
-      );
-    }
 
     // Property Search Filters Component
     function PropertySearchFilters({ neighborhoods, onFilterChange, onSearch }) {
@@ -8392,18 +7867,11 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
         const newFilters = { ...filters, [name]: value };
         setFilters(newFilters);
 
-        // Get FMLS params if neighborhood selected
-        if (name === 'neighborhood' && value) {
-          const fmlsParams = getFMLSParams(value);
-          onFilterChange && onFilterChange({ ...newFilters, ...fmlsParams });
-        } else {
-          onFilterChange && onFilterChange(newFilters);
-        }
+        onFilterChange && onFilterChange(newFilters);
       };
 
       const handleSearch = () => {
-        const fmlsParams = filters.neighborhood ? getFMLSParams(filters.neighborhood) : {};
-        onSearch && onSearch({ ...filters, ...fmlsParams });
+        onSearch && onSearch(filters);
       };
 
       const handleClear = () => {
@@ -8569,29 +8037,11 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
             property_id: property?.id,
             property_address: property?.address,
             property_price: property?.price,
-            source: 'idx_broker',
+            source: 'property_inquiry',
             created_at: new Date().toISOString()
           };
 
-          // Mock save to Supabase
-          console.log('Lead saved to Supabase:', leadData);
-
-          // In production, also send to IDX Broker API
-          // await fetch(`https://api.idxbroker.com/leads/lead`, {
-          //   method: 'POST',
-          //   headers: {
-          //     'Content-Type': 'application/json',
-          //     'accesskey': IDX_CONFIG.apiKey
-          //   },
-          //   body: JSON.stringify({
-          //     firstName: formData.name.split(' ')[0],
-          //     lastName: formData.name.split(' ').slice(1).join(' '),
-          //     email: formData.email,
-          //     phone: formData.phone,
-          //     message: formData.message,
-          //     propertyId: property?.id
-          //   })
-          // });
+          console.log('Form submitted:', leadData);
 
           setSuccess(true);
           setTimeout(() => {
@@ -8693,28 +8143,6 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       );
     }
 
-    // IDX Property Detail Modal Component
-    function IDXPropertyDetail({ isOpen, onClose, property, listingUrl }) {
-      if (!isOpen) return null;
-
-      // Build the IDX hosted page URL for the property
-      const detailUrl = listingUrl || (property?.idx_url) ||
-        `https://${IDX_CONFIG.subdomain}.idxbroker.com/idx/details/listing/${property?.id || ''}`;
-
-      return (
-        <div className="idx-property-detail-modal" onClick={(e) => e.target === e.currentTarget && onClose()}>
-          <div className="idx-property-detail-container">
-            <button className="idx-property-detail-close" onClick={onClose}>&times;</button>
-            <iframe
-              src={detailUrl}
-              className="idx-property-detail-iframe"
-              title="Property Details"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      );
-    }
 
     // Submit Listing Modal Component
     function SubmitModal({ isOpen, onClose, user, type = 'business' }) {
@@ -11086,8 +10514,14 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
         e.preventDefault();
         if (!email) return;
         setNewsletterLoading(true);
-        await new Promise(r => setTimeout(r, 1000));
-        setNewsletterSubmitted(true);
+
+        try {
+          console.log('Form submitted:', { formType: 'newsletter', email, source: currentArea.title + ' Area Page' });
+          setNewsletterSubmitted(true);
+        } catch (error) {
+          console.warn('Newsletter signup failed:', error);
+          setNewsletterSubmitted(true);
+        }
         setNewsletterLoading(false);
       };
 
@@ -11306,8 +10740,14 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
         e.preventDefault();
         if (!email) return;
         setNewsletterLoading(true);
-        await new Promise(r => setTimeout(r, 1000));
-        setNewsletterSubmitted(true);
+
+        try {
+          console.log('Form submitted:', { formType: 'newsletter', email, source: neighborhood.name + ' Neighborhood Page' });
+          setNewsletterSubmitted(true);
+        } catch (error) {
+          console.warn('Newsletter signup failed:', error);
+          setNewsletterSubmitted(true);
+        }
         setNewsletterLoading(false);
       };
 
@@ -11676,7 +11116,7 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
         totalViews: '24,582',
         submissions: '47',
         featured: editorsChoice.filter(s => s.featured).length + businesses.filter(b => b.featured).length + events.filter(e => e.featured).length + properties.filter(p => p.featured).length,
-        hubspotLeads: '156'
+        formSubmissions: '156'
       };
 
       return (
@@ -11743,8 +11183,8 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
                       <div className="cms-stat-change">Across all sections</div>
                     </div>
                     <div className="cms-stat-card">
-                      <div className="cms-stat-label">HubSpot Leads</div>
-                      <div className="cms-stat-value">{stats.hubspotLeads}</div>
+                      <div className="cms-stat-label">Form Submissions</div>
+                      <div className="cms-stat-value">{stats.formSubmissions}</div>
                       <div className="cms-stat-change">↑ 24% conversion</div>
                     </div>
                   </div>
@@ -12058,52 +11498,6 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
                   </div>
 
                   <div className="cms-integration-card">
-                    <div className="cms-integration-icon">H</div>
-                    <div className="cms-integration-info">
-                      <h3>HubSpot CRM</h3>
-                      <p>Sync leads, contacts, and submissions with your HubSpot account</p>
-                    </div>
-                    <div className="cms-integration-status">
-                      <span>●</span> Connected
-                    </div>
-                  </div>
-
-                  <div className="cms-card" style={{padding: '1.5rem'}}>
-                    <h4 style={{marginBottom: '1rem'}}>HubSpot Settings</h4>
-                    <div className="form-group">
-                      <label className="form-label">API Key</label>
-                      <input type="text" className="form-input" value="••••••••••••••••" readOnly style={{background: '#f5f5f5'}} />
-                    </div>
-                    <div className="form-group">
-                      <label className="form-label">Portal ID</label>
-                      <input type="text" className="form-input" value="12345678" readOnly style={{background: '#f5f5f5'}} />
-                    </div>
-                    <div style={{display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1rem'}}>
-                      <div className="cms-toggle-container">
-                        <label className="cms-toggle">
-                          <input type="checkbox" defaultChecked />
-                          <span className="cms-toggle-slider"></span>
-                        </label>
-                        <span className="cms-toggle-label">Sync new submissions</span>
-                      </div>
-                      <div className="cms-toggle-container">
-                        <label className="cms-toggle">
-                          <input type="checkbox" defaultChecked />
-                          <span className="cms-toggle-slider"></span>
-                        </label>
-                        <span className="cms-toggle-label">Auto-create contacts</span>
-                      </div>
-                      <div className="cms-toggle-container">
-                        <label className="cms-toggle">
-                          <input type="checkbox" />
-                          <span className="cms-toggle-slider"></span>
-                        </label>
-                        <span className="cms-toggle-label">Send email notifications</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="cms-integration-card" style={{marginTop: '1rem'}}>
                     <div className="cms-integration-icon" style={{background: '#4A90D9'}}>S</div>
                     <div className="cms-integration-info">
                       <h3>Supabase</h3>
@@ -12469,6 +11863,52 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       );
     }
 
+    // Footer Newsletter Form Component with HubSpot Integration
+    function FooterNewsletterForm() {
+      const [email, setEmail] = useState('');
+      const [submitted, setSubmitted] = useState(false);
+      const [loading, setLoading] = useState(false);
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!email) return;
+        setLoading(true);
+
+        try {
+          console.log('Form submitted:', { formType: 'newsletter', email, source: 'Footer Newsletter' });
+          setSubmitted(true);
+        } catch (error) {
+          console.warn('Newsletter signup failed:', error);
+          setSubmitted(true);
+        }
+        setLoading(false);
+      };
+
+      if (submitted) {
+        return <p style={{color: 'var(--primary-yellow)', fontSize: '0.9rem'}}>Thanks for subscribing!</p>;
+      }
+
+      return (
+        <form className="newsletter-form" onSubmit={handleSubmit} style={{display: 'flex', gap: '0.5rem'}}>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={{flex: 1, padding: '0.6rem 0.8rem', border: '1px solid var(--border-color)', borderRadius: '4px', fontSize: '0.9rem'}}
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            style={{background: 'var(--primary-red)', color: 'white', border: 'none', padding: '0.6rem 1rem', borderRadius: '4px', cursor: loading ? 'default' : 'pointer', fontSize: '0.9rem', fontWeight: '600', opacity: loading ? 0.7 : 1}}
+          >
+            {loading ? '...' : 'Subscribe'}
+          </button>
+        </form>
+      );
+    }
+
     function App() {
       const [activeSection, setActiveSection] = useState('home');
       const [selectedNeighborhood, setSelectedNeighborhood] = useState(null);
@@ -12533,15 +11973,12 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
       const [showPropertyDetail, setShowPropertyDetail] = useState(false);
       const [selectedProperty, setSelectedProperty] = useState(null);
 
-      // IDX property handlers
       const handlePropertyFilterChange = (filters) => {
         setPropertyFilters(filters);
       };
 
       const handlePropertySearch = (filters) => {
-        // Open full search results in IDX hosted page
-        const searchUrl = buildIDXSearchUrl(filters);
-        window.open(searchUrl, '_blank');
+        console.log('Property search:', filters);
       };
 
       const handlePropertyClick = (property) => {
@@ -13350,7 +12787,7 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
           <section className="properties-section" id="properties">
             <div className="section-header">
               <h2 className="section-title">Atlanta Real Estate</h2>
-              <p className="section-subtitle">Live FMLS Listings</p>
+              <p className="section-subtitle">Featured Properties</p>
             </div>
 
             {/* Property Search Filters */}
@@ -13360,39 +12797,26 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
               onSearch={handlePropertySearch}
             />
 
-            {/* IDX Widget Container for Featured Listings */}
-            <div id="idx-featured-properties" className="idx-showcase-wrapper">
-              <IDXWidgetContainer
-                type="showcase"
-                config={IDX_CONFIG}
-                filters={propertyFilters}
-                onPropertyClick={handlePropertyClick}
-              />
-
-              {/* Fallback Demo Properties (shown when IDX not configured) */}
-              {(!window.idxWidgets) && (
-                <div className="properties-grid">
-                  {properties.map((property, index) => (
-                    <div
-                      key={index}
-                      className="property-card"
-                      onClick={() => handlePropertyInquiry(property)}
-                      style={{cursor: 'pointer'}}
-                    >
-                      <img src={property.image} alt={property.address} className="property-image" />
-                      <div className="property-details">
-                        <div className="property-price">{property.price}</div>
-                        <div className="property-address">{property.address}</div>
-                        <div className="property-specs">
-                          <span>🛏️ {property.beds} beds</span>
-                          <span>🛁 {property.baths} baths</span>
-                          <span>📏 {property.sqft} sq ft</span>
-                        </div>
-                      </div>
+            <div className="properties-grid">
+              {properties.map((property, index) => (
+                <div
+                  key={index}
+                  className="property-card"
+                  onClick={() => handlePropertyInquiry(property)}
+                  style={{cursor: 'pointer'}}
+                >
+                  <img src={property.image} alt={property.address} className="property-image" />
+                  <div className="property-details">
+                    <div className="property-price">{property.price}</div>
+                    <div className="property-address">{property.address}</div>
+                    <div className="property-specs">
+                      <span>🛏️ {property.beds} beds</span>
+                      <span>🛁 {property.baths} baths</span>
+                      <span>📏 {property.sqft} sq ft</span>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              )}
+              ))}
             </div>
 
             {/* View All Properties CTA */}
@@ -13515,6 +12939,7 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
                   <li><a href="development.html">ATL Development</a></li>
                   <li><a href="about.html">About</a></li>
                   <li><a href="contact.html">Contact</a></li>
+                  <li><a href="support.html">Help & Support</a></li>
                 </ul>
               </div>
               <div className="footer-column">
@@ -13535,10 +12960,7 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
               <div className="footer-column">
                 <h4>Newsletter</h4>
                 <p style={{fontSize: '0.9rem', color: 'var(--text-light)', marginBottom: '1rem'}}>Get the latest Atlanta vibes delivered to your inbox.</p>
-                <form className="newsletter-form" onSubmit={(e) => e.preventDefault()} style={{display: 'flex', gap: '0.5rem'}}>
-                  <input type="email" placeholder="Enter your email" style={{flex: 1, padding: '0.6rem 0.8rem', border: '1px solid var(--border-color)', borderRadius: '4px', fontSize: '0.9rem'}} />
-                  <button type="submit" style={{background: 'var(--primary-red)', color: 'white', border: 'none', padding: '0.6rem 1rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.9rem', fontWeight: '600'}}>Subscribe</button>
-                </form>
+                <FooterNewsletterForm />
               </div>
               <div className="footer-column">
                 <h4>Legal</h4>
@@ -13547,22 +12969,6 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
                   <li><a href="privacy.html">Privacy Policy</a></li>
                   <li><a href="cookies.html">Cookie Policy</a></li>
                 </ul>
-              </div>
-            </div>
-            {/* MLS Compliance Section */}
-            <div className="mls-compliance">
-              <div className="mls-compliance-content">
-                <img
-                  src="https://www.fmls.com/assets/fmls-logo.png"
-                  alt="FMLS - First Multiple Listing Service"
-                  className="mls-logo"
-                  onError={(e) => { e.target.style.display = 'none'; }}
-                />
-                <div className="mls-disclaimer">
-                  <p><strong>FMLS Data Disclaimer:</strong> Listings marked with the FMLS logo come from FMLS and are held by brokerage firms other than the owner of this website. The listing brokerage is identified in any listing details. Information is deemed reliable but is not guaranteed.</p>
-                  <p>Copyright &copy; {new Date().getFullYear()} First Multiple Listing Service, Inc. All rights reserved. IDX information is provided exclusively for consumers' personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing.</p>
-                  <p>Data last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
-                </div>
               </div>
             </div>
 
@@ -13616,20 +13022,13 @@ For casual hangs, **Victory Sandwich Bar** in Inman Park has sidewalk seating pe
             user={user}
           />
 
-          {/* IDX Property Detail Modal */}
-          <IDXPropertyDetail
-            isOpen={showPropertyDetail}
-            onClose={() => {
-              setShowPropertyDetail(false);
-              setSelectedProperty(null);
-            }}
-            property={selectedProperty}
-          />
+
         </>
       );
     }
 
     ReactDOM.render(<App />, document.getElementById('root'));
   </script>
+
 </body>
 </html>

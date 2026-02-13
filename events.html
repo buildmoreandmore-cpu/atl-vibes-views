@@ -10,6 +10,9 @@
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="/js/site-config.js"></script>
+  <script src="/js/site-renderer.js"></script>
+  <script src="/js/platform-api.js"></script>
   <style>
     :root {
       --primary-yellow: #FFD95A;
@@ -989,6 +992,58 @@
   <script type="text/babel">
     const { useState, useMemo } = React;
 
+    // Events Newsletter Form Component
+    function EventsNewsletterForm() {
+      const [email, setEmail] = useState('');
+      const [submitted, setSubmitted] = useState(false);
+      const [loading, setLoading] = useState(false);
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!email) return;
+        setLoading(true);
+
+        try {
+          console.log('Form submitted:', { formType: 'newsletter', email });
+        } catch (error) {
+          console.warn('Newsletter signup failed:', error);
+        }
+        setSubmitted(true);
+        setLoading(false);
+      };
+
+      if (submitted) {
+        return (
+          <div className="sidebar-module">
+            <h3 className="sidebar-title">Stay Updated</h3>
+            <p style={{color: 'var(--primary-yellow)'}}>Thanks for subscribing!</p>
+          </div>
+        );
+      }
+
+      return (
+        <div className="sidebar-module">
+          <h3 className="sidebar-title">Stay Updated</h3>
+          <p className="newsletter-description">
+            Get weekly event picks and neighborhood news delivered to your inbox.
+          </p>
+          <form className="newsletter-form" onSubmit={handleSubmit}>
+            <input
+              type="email"
+              className="newsletter-input"
+              placeholder="Your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <button type="submit" className="newsletter-btn" disabled={loading}>
+              {loading ? '...' : 'Subscribe'}
+            </button>
+          </form>
+        </div>
+      );
+    }
+
     // Demo Events Data
     const demoEvents = [
       {
@@ -1483,22 +1538,7 @@
               </div>
 
               {/* Newsletter CTA */}
-              <div className="sidebar-module">
-                <h3 className="sidebar-title">Stay Updated</h3>
-                <p className="newsletter-description">
-                  Get weekly event picks and neighborhood news delivered to your inbox.
-                </p>
-                <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-                  <input
-                    type="email"
-                    className="newsletter-input"
-                    placeholder="Your email address"
-                  />
-                  <button type="submit" className="newsletter-btn">
-                    Subscribe
-                  </button>
-                </form>
-              </div>
+              <EventsNewsletterForm />
 
               {/* Guide Download CTA */}
               <div className="guide-cta">
@@ -1570,5 +1610,6 @@
     // Render the app
     ReactDOM.render(<EventsApp />, document.getElementById('root'));
   </script>
+
 </body>
 </html>
